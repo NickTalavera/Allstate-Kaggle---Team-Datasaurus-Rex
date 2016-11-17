@@ -13,15 +13,16 @@ dataFolder = './Data/'
 nrows= 1000
 testData = read.csv(paste0(dataFolder,'test.csv'), nrows = nrows)
 trainData = read.csv(paste0(dataFolder,'train.csv'), nrows = nrows)
-cat_var <- names(trainData)[which(sapply(trainData, is.character))]
-num_var <- names(trainData)[which(sapply(trainData, is.numeric))]
-num_var <- setdiff(num_var, c("id", "loss"))
-trainData_cat <- trainData[,.SD, .SDcols = cat_var]
-trainData_num <- trainData[,.SD,.SDcols = num_var]
+trainData_cat <- cbind(trainData[,1:117],trainData[,-1])
+head(trainData_cat)
+trainData_num <- cbind(trainData[,118:ncol(trainData)])
+head(trainData_num)
 
 # trainData[, grepl("cont", names(trainData))]
 head(trainData)
 testData$loss = NA
+testData$cont
+
 dataBoth = rbind(testData,trainData)
 ultimateData = kNN(dataBoth, variable = "loss")
 head(ultimateData)
