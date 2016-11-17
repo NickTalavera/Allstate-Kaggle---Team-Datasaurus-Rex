@@ -21,17 +21,3 @@ test = read.csv('../Data/test.csv')
 summary(test)
 
 allstate.euclidean = kknn(loss ~ ., train, test) # This fails
-
-# Let's try random forests on numeric variables only
-library(randomForest)
-
-# Goal: Run random forests on continuous variables
-cts.vars = colnames(train)[sapply(train, class) == "numeric"]
-train.cts = train[ , cts.vars]
-rf.allstate = tree(loss ~ ., data = train.cts)
-
-predicted.loss = predict(rf.allstate, newdata = test)
-
-submission = data.frame(id=test$id, loss=predicted.loss)
-
-write.csv(submission, 'rf_submission.csv')
