@@ -8,21 +8,32 @@ library(stringr)
 library(Hmisc)
 library(stringi)
 library(dplyr)
+library(plyr)
 setwd('/Users/nicktalavera/Coding/NYC_Data_Science_Academy/Projects/Allstate-Kaggle---Team-Datasaurus-Rex')
 dataFolder = './Data/'
-nrows= 1000
-testData = read.csv(paste0(dataFolder,'test.csv'), nrows = nrows)
-trainData = read.csv(paste0(dataFolder,'train.csv'), nrows = nrows)
-trainData_cat <- cbind(trainData[,1:117],trainData[,-1])
-head(trainData_cat)
+if (!exists("testData")) { 
+  testData = read.csv(paste0(dataFolder,'test.csv'))
+}
+if (!exists("trainData")) { 
+  trainData = read.csv(paste0(dataFolder,'train.csv'))
+}
+trainData_cat <- cbind(trainData[,1:117])
 trainData_num <- cbind(trainData[,118:ncol(trainData)])
-head(trainData_num)
-
+# head(trainData_num)
+# trainData_num.describe()
 # trainData[, grepl("cont", names(trainData))]
-head(trainData)
+# head(trainData)
 testData$loss = NA
-testData$cont
 
-dataBoth = rbind(testData,trainData)
-ultimateData = kNN(dataBoth, variable = "loss")
-head(ultimateData)
+chiSquareAllColumns = function(data){
+  chiResults = data.frame(matrix(ncol = 0, nrow = ncol(data)))
+  head(chiResults)
+  for(columnNameInner in names(data)){
+    print(paste("columnNameInner:", columnNameInner))
+    chiResults[,columnNameInner] = apply(data, 2 , function(i) chisq.test(table(data[,columnNameInner] , i ))$p.value)
+    print(summary(chiResults))
+  }
+  chiResults[chiResults > 0.05] = 'Inisgnificant'
+  return(chiResults)
+}
+chiSquareAllColumns(trainData_num)
