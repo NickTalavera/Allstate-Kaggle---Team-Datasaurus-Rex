@@ -1,5 +1,5 @@
-## Read data
-# 
+rm(list = ls()) #If I want my environment reset for testing.
+
 library(data.table)
 library(dplyr)
 library(caret)
@@ -65,7 +65,7 @@ plot(lmImp,top = 20)
 mean(lmFit$resample$RMSE)
 
 predicted <- predict(lmFit, subTest)
-RMSE(pred = predicted, obs = lossTest)
+# RMSE(pred = predicted, obs = lossTest)
 
 plot(x = predicted, y = lossTest)
 
