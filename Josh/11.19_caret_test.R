@@ -1,7 +1,8 @@
 ## Read data
-setwd("Data/")
-as_train <- read.csv("train.csv")
-as_test <- read.csv("test.csv")
+library("data.table")
+
+as_train <- fread("../Data/train.csv")
+as_test <- fread("../Data/test.csv")
 dim(as_train)
 
 table(as_train$cat112)
@@ -11,19 +12,22 @@ train_e <- as_train %>% filter(cat112 == "E") %>% select(-cat112, -id)
 test_e <- as_test %>% filter(cat112 == "E") %>% select(-cat112, -id)
 ## log transform loss
 loss_e <- log(train_e$loss + 1)
-dm_train <- model.matrix(loss ~ ., data = train_e)
-head(dm_train, n = 4)
 
-dm_train <- model.matrix(loss ~ ., data = train_e)
-head(dm_train, n = 4)
+library(caret)
+# Remove variables with one factor
+nzv <- nearZeroVar(train_e)
+train_e <- train_e[, -nzv]
+test_e <- test_e[, -nzv]
 
-> library(caret)
+# Create dummy variables
+dm_train = data.frame(predict(dummyVars("loss ~ .", data=train_e), newdata=train_e))
+dm_test = data.frame(predict(dummyVars("~ .", data=test_e), newdata=test_e))
+# Remove nero zero variance columns
 preProc <- preProcess(dm_train,
                       method = "nzv")
-preProc
 
 dm_train <- predict(preProc, dm_train)
-dim(dm_train)
+dm_test <- predict(preProc, dm_test)
 
 set.seed(321)
 trainIdx <- createDataPartition(loss_e, 
@@ -34,24 +38,6 @@ subTrain <- dm_train[trainIdx,]
 subTest <- dm_train[-trainIdx,]
 lossTrain <- loss_e[trainIdx]
 lossTest <- loss_e[-trainIdx]
-
-lmFit <- train(x = subTrain, 
-               y = lossTrain,
-               method = "lm")
-
-summary(lmFit)
-
-lmImp <- varImp(lmFit, scale = FALSE)
-lmImp
-
-plot(lmImp,top = 20)
-
-mean(lmFit$resample$RMSE)
-
-predicted <- predict(lmFit, subTest)
-RMSE(pred = predicted, obs = lossTest)
-
-plot(x = predicted, y = lossTest)
 
 fitCtrl <- trainControl(method = "cv",
                         number = 5,
@@ -70,3 +56,13 @@ gbmFit <- train(x = subTrain,
                 tuneGrid = gbmGrid,
                 metric = 'RMSE',
                 maximize = FALSE)
+
+plot(gbmFit)
+plot(gbmFit, plotType = "level")
+gbmImp <- varImp(gbmFit, scale = FALSE)
+plot(gbmImp,top = 20)
+
+mean(gbmFit$resample$RMSE)
+
+predicted <- predict(gbmFit, subTest)
+RMSE(pred = predicted, obs = lossTest)

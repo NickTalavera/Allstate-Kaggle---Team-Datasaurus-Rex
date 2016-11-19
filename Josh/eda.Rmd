@@ -12,8 +12,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Let's do some basic EDA to understand our data!
 ```{r}
 # Load in the data and summarize
-train = read.csv('../Data/train.csv')
-test = read.csv('../Data/test.csv')
+library(data.table)
+train = fread('../Data/train.csv')
+test = fread('../Data/test.csv')
 summary(train)
 dim(train)
 ```
@@ -50,7 +51,7 @@ ggplot(melted_cts_vars,aes(x = value)) +
     facet_wrap(~variable,scales = "free_x") + 
     geom_histogram()
 ```
-variable cont2 looks like discrete values.
+variable cont2 looks like discrete values. Something fishy going on!
 
 ## What are the levels in each categorical variable?
 ```{r}
@@ -92,4 +93,6 @@ for(var in names(levels_by_cat)){
 cat15, cat70 have insignificant t-tests.
 
 cat88 has insignificant anova.
+
+
 
