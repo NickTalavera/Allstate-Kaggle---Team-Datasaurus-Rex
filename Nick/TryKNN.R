@@ -12,7 +12,7 @@ library(plyr)
 library(foreach)
 library(parallel)
 library(doParallel)
-cores.Number = detectCores(all.tests = FALSE, logical = TRUE)
+cores.Number = max(1,detectCores(all.tests = FALSE, logical = TRUE)-1)
 cl <- makeCluster(2)
 registerDoParallel(cl, cores=cores.Number)
 if (dir.exists('/Users/nicktalavera/Coding/NYC_Data_Science_Academy/Projects/Allstate-Kaggle---Team-Datasaurus-Rex')) {

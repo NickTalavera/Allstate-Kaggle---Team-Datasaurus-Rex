@@ -1,11 +1,27 @@
 ## Read data
-setwd("Data/")
-as_train <- read.csv("train.csv")
-as_test <- read.csv("test.csv")
+# 
+library(data.table)
+library(dplyr)
+library(caret)
+
+if (dir.exists('/Users/nicktalavera/Coding/NYC_Data_Science_Academy/Projects/Allstate-Kaggle---Team-Datasaurus-Rex/Data')) {
+  setwd('/Users/nicktalavera/Coding/NYC_Data_Science_Academy/Projects/Allstate-Kaggle---Team-Datasaurus-Rex/Data')
+} else if (dir.exists("~/Allstate-Kaggle---Team-Datasaurus-Rex")) {
+  setwd("~/Allstate-Kaggle---Team-Datasaurus-Rex")
+} else if (dir.exists("Data/")) {
+  setwd("Data/")
+}
+
+cores.Number = max(1,detectCores(all.tests = FALSE, logical = TRUE)-1)
+cl <- makeCluster(2)
+registerDoParallel(cl, cores=cores.Number)
+
+as_train <- fread("train.csv", stringsAsFactors = TRUE)
+as_test <- fread("test.csv", stringsAsFactors = TRUE)
 dim(as_train)
 
 table(as_train$cat112)
-library(dplyr)
+
 ## create subset with cat112 == "E"
 train_e <- as_train %>% filter(cat112 == "E") %>% select(-cat112, -id)
 test_e <- as_test %>% filter(cat112 == "E") %>% select(-cat112, -id)
@@ -17,7 +33,7 @@ head(dm_train, n = 4)
 dm_train <- model.matrix(loss ~ ., data = train_e)
 head(dm_train, n = 4)
 
-> library(caret)
+
 preProc <- preProcess(dm_train,
                       method = "nzv")
 preProc
@@ -70,3 +86,4 @@ gbmFit <- train(x = subTrain,
                 tuneGrid = gbmGrid,
                 metric = 'RMSE',
                 maximize = FALSE)
+stopCluster(cl)
