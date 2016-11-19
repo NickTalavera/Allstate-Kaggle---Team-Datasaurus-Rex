@@ -3,6 +3,7 @@ rm(list = ls()) #If I want my environment reset for testing.
 library(data.table)
 library(dplyr)
 library(caret)
+library(doParallel)
 
 if (dir.exists('/Users/nicktalavera/Coding/NYC_Data_Science_Academy/Projects/Allstate-Kaggle---Team-Datasaurus-Rex/Data')) {
   setwd('/Users/nicktalavera/Coding/NYC_Data_Science_Academy/Projects/Allstate-Kaggle---Team-Datasaurus-Rex/Data')
