@@ -54,7 +54,7 @@ gbmFit <- train(x = subTrain,
                 method = "gbm", 
                 trControl = fitCtrl,
                 tuneGrid = gbmGrid,
-                metric = 'RMSE',
+                metric = 'MAE',
                 maximize = FALSE)
 
 plot(gbmFit)

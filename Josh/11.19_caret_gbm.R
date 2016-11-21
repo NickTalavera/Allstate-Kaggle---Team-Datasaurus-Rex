@@ -20,8 +20,8 @@ train_e <- train_e[, -nzv]
 test_e <- test_e[, -nzv]
 
 # Create dummy variables
-dm_train = data.frame(predict(dummyVars("loss ~ .", data=train_e), newdata=train_e))
-dm_test = data.frame(predict(dummyVars("~ .", data=test_e), newdata=test_e))
+dm_train = data.table(predict(dummyVars("loss ~ .", data=train_e), newdata=train_e))
+dm_test = data.table(predict(dummyVars("~ .", data=test_e), newdata=test_e))
 # Remove nero zero variance columns
 preProc <- preProcess(dm_train,
                       method = "nzv")
@@ -44,8 +44,8 @@ fitCtrl <- trainControl(method = "cv",
                         verboseIter = TRUE,
                         summaryFunction=defaultSummary)
 
-gbmGrid <- expand.grid( n.trees = seq(100,500,50), 
-                        interaction.depth = c(1,3,5,7), 
+gbmGrid <- expand.grid( n.trees = seq(100), 
+                        interaction.depth = c(1), 
                         shrinkage = 0.1,
                         n.minobsinnode = 20)
 
@@ -66,3 +66,8 @@ mean(gbmFit$resample$RMSE)
 
 predicted <- predict(gbmFit, subTest)
 RMSE(pred = predicted, obs = lossTest)
+
+# Once we are happy with model, run model on dm_test
+# and transform back to loss
+log.loss.predict = predict(gbmFit, dm_test)
+loss.predict = exp(log.loss.predict) - 1
