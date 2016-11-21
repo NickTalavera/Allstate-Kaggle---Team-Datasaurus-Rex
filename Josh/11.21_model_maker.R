@@ -1,5 +1,6 @@
 # Parameters
-subset_ratio = 0.1
+subset_ratio = 1
+cv_folds = 5
 parallelize = TRUE
 output = TRUE
 plot.model = TRUE
@@ -14,8 +15,8 @@ if(parallelize){
 
 # Read training and test data
 library(data.table)
-as_train <- fread("../Data/train.csv", drop=c("id"))
-as_test <- fread("../Data/test.csv", drop=c("id"))
+as_train <- fread("../Data/train.csv", drop=c("id"), stringsAsFactors = TRUE)
+as_test <- fread("../Data/test.csv", drop=c("id"), stringsAsFactors = TRUE)
 
 # Subset the data
 library(caret)
@@ -26,11 +27,13 @@ as_test = as_train[testing_subset, ]
 
 # Pre-processing
 library(dplyr)
+print("Pre-processing...")
 preProc <- preProcess(as_train %>% select(-loss), 
                       method = c("nzv", "center", "scale"))
 
 dm_train = predict(preProc, newdata = as_train %>% select(-loss))
 dm_test = predict(preProc, newdata = as_test)
+print("...Done!")
 
 
 # Setting up the cross-validation
@@ -46,26 +49,29 @@ subTest <- dm_train[-trainIdx,]
 lossTrain <- as_train$loss[trainIdx]
 lossTest <- as_train$loss[-trainIdx]
 
+# Setting up the model
 # Custom metric function for MAE
 library(Metrics)
 maeSummary <- function (data,
                         lev = NULL,
                         model = NULL) {
-  out <- mae(data$obs, data$pred)  
+  out <- Metrics::mae(data$obs, data$pred)  
   names(out) <- "MAE"
   out
 }
 
 fitCtrl <- trainControl(method = "cv",
-                        number = 5,
+                        number = cv_folds,
                         verboseIter = TRUE,
-                        summaryFunction = defaultSummary())
+                        summaryFunction = defaultSummary)
 
 gbmGrid <- expand.grid( n.trees = seq(100), 
                         interaction.depth = c(1), 
                         shrinkage = 0.1,
                         n.minobsinnode = 20)
 
+# Running the model
+print("Running the model...")
 gbmFit <- train(x = subTrain, 
                 y = lossTrain,
                 method = "gbm", 
@@ -73,16 +79,21 @@ gbmFit <- train(x = subTrain,
                 tuneGrid = gbmGrid,
                 metric = 'RMSE',
                 maximize = FALSE)
+print("...Done!")
 
-plot(gbmFit)
-plot(gbmFit, plotType = "level")
-gbmImp <- varImp(gbmFit, scale = FALSE)
-plot(gbmImp,top = 20)
+if(plot.model){
+  plot(gbmFit)
+  # Variable importance
+  # gbmImp <- varImp(gbmFit, scale = FALSE)
+  # plot(gbmImp,top = 20)
+}
 
-mean(gbmFit$resample$RMSE)
+# MAE on cross-validation
+mean(gbmFit$resample$MAE)
 
+# MAE on validation set
 predicted <- predict(gbmFit, subTest)
-RMSE(pred = predicted, obs = lossTest)
+mae(predicted, lossTest)
 
 if(parallelize){
   stopCluster(cl)
