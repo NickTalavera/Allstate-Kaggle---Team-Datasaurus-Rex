@@ -35,7 +35,7 @@ if (!dir.exists(output_path)) {
   dir.create(output_path)
 }
 directory = file.path(output_path, 
-                      paste(format(Sys.time(), "%d_%m_%Y %H.%M.%S"), model_method))
+                      paste0(format(Sys.time(), "%d_%m_%Y_%H.%M.%S_"), model_method))
 dir.create(directory)
 
 # Copy this file to directory

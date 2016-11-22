@@ -4,9 +4,9 @@ server_dir = '~/ML'
 
 # Model parameters
 model_method = "gbm"
-model_grid <- expand.grid( n.trees = seq(300, 1000, 100), 
+model_grid <- expand.grid( n.trees = seq(100, 1000, 100), 
                            interaction.depth = c(1, 3, 5, 7), 
-                           shrinkage = 0.05,
+                           shrinkage = 0.1,
                            n.minobsinnode = 20)
 
 # Misc Parameters
@@ -35,7 +35,7 @@ if (!dir.exists(output_path)) {
   dir.create(output_path)
 }
 directory = file.path(output_path, 
-                      paste(format(Sys.time(), "%d_%m_%Y %H.%M.%S"), model_method))
+                      paste0(format(Sys.time(), "%d_%m_%Y_%H.%M.%S_"), model_method))
 dir.create(directory)
 
 # Copy this file to directory
