@@ -1,6 +1,6 @@
 # Directory parameters
 local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
-server_dir = '~/ML'
+server_dir = '~/'
 
 # Model parameters
 model_method = "gbm"
@@ -27,7 +27,7 @@ group_path = "Group"
 if(dir.exists(local_dir)){
   setwd(local_dir)
 }else{
-  setwd(server_dir)
+  # Use Dina server
 }
 
 # Create the output directory

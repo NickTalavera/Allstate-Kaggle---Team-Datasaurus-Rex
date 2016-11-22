@@ -4,15 +4,15 @@ server_dir = '~/ML'
 
 # Model parameters
 model_method = "gbm"
-model_grid <- expand.grid( n.trees = seq(300, 400, 50), 
-                           interaction.depth = c(1, 7), 
+model_grid <- expand.grid( n.trees = seq(300, 1000, 100), 
+                           interaction.depth = c(1, 3, 5, 7), 
                            shrinkage = 0.05,
                            n.minobsinnode = 20)
 
 # Misc Parameters
-subset_ratio = .01 # for testing purposes (set to 1 for full data)
+subset_ratio = 1 # for testing purposes (set to 1 for full data)
 partition_ratio = .8 # for cross-validation
-cv_folds = 2 # for cross-validation 
+cv_folds = 5 # for cross-validation 
 
 parallelize = TRUE # parallelize the computation?
 create_submission = FALSE # create a submission for Kaggle?
