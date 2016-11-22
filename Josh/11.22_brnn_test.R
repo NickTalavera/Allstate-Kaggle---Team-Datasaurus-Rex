@@ -1,9 +1,6 @@
 # Model parameters
-model_method = "gbm"
-model_grid <- expand.grid( n.trees = seq(300, 400, 50), 
-                           interaction.depth = c(1, 7), 
-                           shrinkage = 0.05,
-                           n.minobsinnode = 20)
+model_method = "brnn"
+model_grid <- NULL
 
 # Misc Parameters
 subset_ratio = .01 # for testing purposes (set to 1 for full data)

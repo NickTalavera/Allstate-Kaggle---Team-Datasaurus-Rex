@@ -1,9 +1,6 @@
 # Model parameters
-model_method = "gbm"
-model_grid <- expand.grid( n.trees = seq(300, 500, 50), 
-                           interaction.depth = c(1, 3, 5, 7), 
-                           shrinkage = 0.1,
-                           n.minobsinnode = 20)
+model_method = "glm"
+model_grid <- NULL
 
 # Misc Parameters
 subset_ratio = .01 # for testing purposes (set to 1 for full data)
@@ -11,14 +8,18 @@ partition_ratio = .8 # for cross-validation
 cv_folds = 2 # for cross-validation 
 
 parallelize = TRUE # parallelize the computation?
-create_submission = TRUE # create a submission for Kaggle?
-use_log = TRUE # take the log transform of the response?
-use_mae_metric = TRUE # use mean aboslute error for cross-validation?
+create_submission = FALSE # create a submission for Kaggle?
+use_log = FALSE # take the log transform of the response?
+verbose_on = TRUE
+metric = 'MAE' # metric use for evaluating cross-validation
 
 data_path = "../Data" # data path containing train and test sets
 output_path = "../Output" # output path for storing results
 
 # Create the output directory
+if (!dir.exists(output_path)) {
+  dir.create(output_path)
+}
 directory = file.path(output_path, 
                       paste(format(Sys.time(), "%d_%m_%Y %H.%M.%S"), model_method))
 dir.create(directory)

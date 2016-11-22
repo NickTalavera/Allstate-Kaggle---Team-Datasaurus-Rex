@@ -41,6 +41,7 @@ as_test = as_test %>% select(-id)
 
 # Subset the data
 library(caret)
+set.seed(0)
 training_subset = createDataPartition(y = train_ids, p = subset_ratio, list = FALSE)
 as_train <- as_train[training_subset, ]
 
@@ -55,7 +56,7 @@ if(use_log){
 print("Pre-processing...")
 
 # Convert categorical to dummy variables
-as_train = model.matrix(loss ~ . - 1, data = as_train) # - 1 to ignore intercept
+as_train = model.matrix(loss ~ . -1, data = as_train) # - 1 to ignore intercept
 as_test = model.matrix( ~ . -1, data = as_test)
 
 # Run caret's pre-processing methods
@@ -72,7 +73,7 @@ set.seed(0)
 
 # Partition training data into train and test split
 trainIdx <- createDataPartition(loss, 
-                                p = .8,
+                                p = partition_ratio,
                                 list = FALSE,
                                 times = 1)
 sub_train <- dm_train[trainIdx,]
@@ -90,16 +91,14 @@ maeSummary <- function (data,
   out
 }
 
-if(use_mae_metric){
+if(metric == 'MAE'){
   summary_function = maeSummary
-  metric = 'MAE'
 }else{
   summary_function = defaultSummary
-  metric = 'RMSE'
 }
 fitCtrl <- trainControl(method = "cv",
                         number = cv_folds,
-                        verboseIter = TRUE,
+                        verboseIter = verbose_on,
                         summaryFunction = summary_function,
                         allowParallel = parallelize)
 
@@ -128,9 +127,13 @@ method_name = training_model$method
 best_params = training_model$bestTune
 
 # Output plot
-png(file.path(directory, 'tuning_plot.png'))
-print(plot(training_model))
-dev.off()
+tryCatch({
+  png(file.path(directory, 'tuning_plot.png'))
+  print(plot(training_model))
+  dev.off()
+}, error = function(e){
+  print("No tuning parameters found. Skipping plot.")
+})
 
 # Output grid, control, time stamp, and model name
 model_results = list(grid = model_grid, train_control = fitCtrl, best_params = best_params,
