@@ -1,7 +1,3 @@
-# Directory parameters
-local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
-server_dir = '~/ML'
-
 # Model parameters
 model_method = "gbm"
 model_grid <- expand.grid( n.trees = seq(300, 400, 50), 
@@ -23,13 +19,6 @@ metric = 'MAE' # metric use for evaluating cross-validation
 data_path = "Data" # data path containing train and test sets
 output_path = "Output" # output path for storing results
 group_path = "Group"
-
-script_dir = getwd()
-if(dir.exists(local_dir)){
-  setwd(local_dir)
-}else{
-  setwd(server_dir)
-}
 
 # Create the output directory
 if (!dir.exists(output_path)) {
