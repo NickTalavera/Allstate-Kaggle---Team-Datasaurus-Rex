@@ -10,9 +10,9 @@ model_grid <- expand.grid( n.trees = seq(100, 1000, 100),
                            n.minobsinnode = 20)
 
 # Misc Parameters
-subset_ratio = 1 # for testing purposes (set to 1 for full data)
+subset_ratio = .01 # for testing purposes (set to 1 for full data)
 partition_ratio = .8 # for cross-validation
-cv_folds = 5 # for cross-validation 
+cv_folds = 2 # for cross-validation 
 
 parallelize = TRUE # parallelize the computation?
 create_submission = FALSE # create a submission for Kaggle?
@@ -24,6 +24,7 @@ data_path = "Data" # data path containing train and test sets
 output_path = "Output" # output path for storing results
 group_path = "Group"
 
+script_dir = getwd()
 if(dir.exists(local_dir)){
   setwd(local_dir)
 }else{
@@ -39,9 +40,21 @@ directory = file.path(output_path,
 dir.create(directory)
 
 # Copy this file to directory
-file.copy(sys.frame(1)$ofile,
-          to = file.path(directory,
-                         paste0(model_method, ".R")))
+library(base)
+thisFile <- function() {
+  cmdArgs <- commandArgs(trailingOnly = FALSE)
+  needle <- "--file="
+  match <- grep(needle, cmdArgs)
+  if (length(match) > 0) {
+    # Rscript
+    return(file.path(script_dir, sub(needle, "", cmdArgs[match])))
+  } else {
+    # 'source'd via R console
+    return(normalizePath(sys.frames()[[1]]$ofile))
+  }
+}
+
+file.copy(thisFile(), to = file.path(directory, paste0(model_method, ".R")))
 
 # Run the model and output results
 source(file.path(group_path, 'model_maker.R'))
