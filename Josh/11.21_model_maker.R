@@ -1,9 +1,10 @@
 # Parameters
-subset_ratio = 1
+subset_ratio = .1
 cv_folds = 5
 parallelize = TRUE
 output = TRUE
 plot.model = TRUE
+use_log = TRUE
 
 # Add parallelization
 if(parallelize){
@@ -16,14 +17,18 @@ if(parallelize){
 # Read training and test data
 library(data.table)
 as_train <- fread("../Data/train.csv", drop=c("id"), stringsAsFactors = TRUE)
-as_test <- fread("../Data/test.csv", drop=c("id"), stringsAsFactors = TRUE)
+as_test <- fread("../Data/test.csv", stringsAsFactors = TRUE)
+test_ids = as_test$id
+as_test = as_test %>% select(-id)
+
+if(use_log){
+  as_train$loss = log(as_train$loss + 1)
+}
 
 # Subset the data
 library(caret)
 training_subset = createDataPartition(y = as_train$loss, p = subset_ratio, list = FALSE)
 as_train <- as_train[training_subset, ]
-testing_subset = createDataPartition(y = as_test$cat1, p = subset_ratio, list = FALSE)
-as_test = as_train[testing_subset, ]
 
 # Pre-processing
 library(dplyr)
@@ -50,27 +55,17 @@ lossTrain <- as_train$loss[trainIdx]
 lossTest <- as_train$loss[-trainIdx]
 
 # Setting up the model
-# Custom metric function for MAE
-library(Metrics)
-maeSummary <- function (data,
-                        lev = NULL,
-                        model = NULL) {
-  out <- Metrics::mae(data$obs, data$pred)  
-  names(out) <- "MAE"
-  out
-}
-
 fitCtrl <- trainControl(method = "cv",
                         number = cv_folds,
                         verboseIter = TRUE,
                         summaryFunction = defaultSummary)
 
-gbmGrid <- expand.grid( n.trees = seq(100), 
-                        interaction.depth = c(1), 
+gbmGrid <- expand.grid( n.trees = seq(100, 300, 100), 
+                        interaction.depth = c(1, 7), 
                         shrinkage = 0.1,
                         n.minobsinnode = 20)
 
-# Running the model
+# Running the model on the loss
 print("Running the model...")
 gbmFit <- train(x = subTrain, 
                 y = lossTrain,
@@ -81,19 +76,35 @@ gbmFit <- train(x = subTrain,
                 maximize = FALSE)
 print("...Done!")
 
+# Estimated RMSE
+test.predicted <- predict(gbmFit, subTest)
+estimated_rmse = postResample(pred = test.predicted, obs = lossTest)
+estimated_rmse
+
+# Train final model on all of the data with best tuning parameters
+gbm_final = train(x = dm_train,
+            y = as_train$loss,
+            method = "gbm",
+            tuneGrid = gbmFit$bestTune,
+            metric = 'RMSE',
+            maximize = FALSE)
+
+# Output kaggle submission
+predicted_loss = predict(gbm_final, newdata = dm_test)
+if(log){
+  predicted_loss = exp(predicted_loss) - 1
+}
+submission = data.frame(id=test_ids, loss=predicted_loss)
+
+dir.create('../Output')
+write.csv(submission, file="../Output/kaggle_submission.csv", row.names = FALSE)
+
+# Output run time, grid, control, time stamp, and model name
+
+# Output model plot
 if(plot.model){
   plot(gbmFit)
-  # Variable importance
-  # gbmImp <- varImp(gbmFit, scale = FALSE)
-  # plot(gbmImp,top = 20)
 }
-
-# MAE on cross-validation
-mean(gbmFit$resample$MAE)
-
-# MAE on validation set
-predicted <- predict(gbmFit, subTest)
-mae(predicted, lossTest)
 
 if(parallelize){
   stopCluster(cl)
