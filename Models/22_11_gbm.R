@@ -24,11 +24,6 @@ data_path = "Data" # data path containing train and test sets
 output_path = "Output" # output path for storing results
 group_path = "Group"
 
-if(dir.exists(local_dir)){
-  setwd(local_dir)
-}else{
-  setwd(server_dir)
-}
 
 # Create the output directory
 if (!dir.exists(output_path)) {
