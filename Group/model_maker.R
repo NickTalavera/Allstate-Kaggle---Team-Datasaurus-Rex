@@ -32,12 +32,12 @@ library(dplyr)
 as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE)
 # Store and remove ids
 train_ids = as_train$id
-as_train = as_train %>% select(-id)
+as_train = as_train %>% dplyr::select(-id)
 
 as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE)
 # Store and remove ids
 test_ids = as_test$id
-as_test = as_test %>% select(-id)
+as_test = as_test %>% dplyr::select(-id)
 
 # Subset the data
 library(caret)
