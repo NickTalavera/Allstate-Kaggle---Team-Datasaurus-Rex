@@ -107,21 +107,15 @@ if(model_file == "all"){
   if(parallelize){
     parSapply(cl, modelFiles, run_model, output_path, models_path, data_path, make_model)
   } else {
-    sapply(modelFiles, run_model)
+    sapply(modelFiles, run_model, output_path, models_path, data_path, make_model)
   }
 }else{
   # Run the model
-  run_model(model_file)
+  run_model(model_file, output_path, models_path, data_path, make_model)
 }
 
 # Stop parallel clusters
-<<<<<<< HEAD
-if(parallelize){
-  stopCluster(cl)
-}
-=======
 if (exists("cl")) {
   try({stopCluster(cl)})
   try({remove(cl)})
 }
->>>>>>> b005688d258f651afa71a07c75772d3324b2d481
