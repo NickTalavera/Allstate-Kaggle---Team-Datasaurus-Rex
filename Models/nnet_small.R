@@ -1,5 +1,6 @@
 # Model parameters
 model_method = "nnet"
+library(nnet)
 model_grid <- expand.grid(size  = c(2,4,6,8),
                           decay = 0)
 
