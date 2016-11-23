@@ -13,4 +13,5 @@ stopifnot(dir.exists('Data'))
 models_dir = 'Models'
 modelFiles = list.files(path = paste0(getwd(),"/",models_dir), pattern= paste0(prefix,"*.R$"), full.names = TRUE, ignore.case = TRUE)
 modelFiles[modelFiles != 'Run_All_Models.R']
+modelFiles[modelFiles != 'model_template.R']
 sapply(modelFiles, source)
