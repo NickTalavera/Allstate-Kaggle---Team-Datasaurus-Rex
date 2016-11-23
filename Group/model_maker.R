@@ -19,7 +19,7 @@
 # output_path - output path for storing results
 
 # Add parallelization
-if(parallelize){
+if(parallelize & !exists("cl")){
   library(doParallel)
   cores.number = detectCores(all.tests = FALSE, logical = TRUE)
   cl = makeCluster(2)
@@ -165,6 +165,6 @@ if(create_submission){
 }
 
 # Stop parallel clusters
-if(parallelize){
+if(parallelize & !exists("cl")){
   stopCluster(cl)
 }
