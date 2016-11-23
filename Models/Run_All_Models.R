@@ -1,7 +1,7 @@
-prefix = "" #The beginning of the name of the files you want to run eg. "22_11" or "" for all
+prefix = "22_11_gbm_small" #The beginning of the name of the files you want to run eg. "22_11" or "" for all
 
 # Directory parameters
-local_dir = 'YOUR LOCAL DIRECTORY'
+local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
 server_dir = '~/ML'
 if(dir.exists(local_dir)){
   setwd(local_dir)

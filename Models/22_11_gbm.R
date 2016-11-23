@@ -1,7 +1,3 @@
-# Directory parameters
-local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
-server_dir = '~/ML'
-
 # Model parameters
 model_method = "gbm"
 model_grid <- expand.grid( n.trees = seq(100, 1000, 100), 
