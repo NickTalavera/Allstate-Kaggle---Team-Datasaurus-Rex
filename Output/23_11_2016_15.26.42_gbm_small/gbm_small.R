@@ -1,7 +1,9 @@
 # Model parameters
-model_method = "nnet"
-model_grid <- expand.grid(size  = c(2),
-                          decay = 0)
+model_method = "gbm"
+model_grid <- expand.grid( n.trees = c(100, 200), 
+                           interaction.depth = 1, 
+                           shrinkage = 0.05,
+                           n.minobsinnode = 20)
 
 # Cross-validation parameters
 partition_ratio = .8 # for cross-validation
