@@ -1,6 +1,7 @@
 # Model parameters
 model_method = "nnet"
-model_grid <- NULL
+model_grid = expand.grid(size  = 25,
+                         decay = 0)
 
 # Cross-validation parameters
 partition_ratio = .8 # for cross-validation
