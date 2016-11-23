@@ -5,8 +5,14 @@ parallelize = TRUE
 if (exists("cl")) {
   stopCluster(cl)
 }
+
+# Add parallelization
+library(doParallel)
+if (exists("cl")) {
+  try({stopCluster(cl)})
+  try({remove(cl)})
+}
 if(parallelize){
-  library(doParallel)
   cores.number = detectCores(all.tests = FALSE, logical = TRUE)
   cl = makeCluster(2)
   registerDoParallel(cl, cores=cores.number)
@@ -34,6 +40,7 @@ if(parallelize){
 }
 
 # Stop parallel clusters
-if(parallelize){
-  stopCluster(cl)
+if (exists("cl")) {
+  try({stopCluster(cl)})
+  try({remove(cl)})
 }

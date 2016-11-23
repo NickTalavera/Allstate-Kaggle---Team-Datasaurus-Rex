@@ -8,6 +8,7 @@ parallelize = TRUE # parallelize models?
 local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
 server_dir = '~/ML'
 
+
 # Directory parameters
 data_path = "Data" # data path containing train and test sets
 output_path = "Output" # output path for storing results
@@ -18,7 +19,6 @@ models_path = "Models" # path to models
 if(!interactive()){
   # Get input arguments
   args = commandArgs(trailingOnly=TRUE)
-  
   # Test if there is at least one argument: if not, return an error
   if (length(args) == 0) {
     stop("Usage: Run_Model [model.R]", call. = FALSE)
@@ -29,6 +29,10 @@ if(!interactive()){
 
 # Add parallelization
 library(doParallel)
+if (exists("cl")) {
+  try({stopCluster(cl)})
+  try({remove(cl)})
+}
 if (parallelize){
   cores.number = detectCores(all.tests = FALSE, logical = TRUE)
   cl = makeCluster(2)
@@ -110,6 +114,7 @@ if(model_file == "all"){
 }
 
 # Stop parallel clusters
-if(parallelize){
-  stopCluster(cl)
+if (exists("cl")) {
+  try({stopCluster(cl)})
+  try({remove(cl)})
 }
