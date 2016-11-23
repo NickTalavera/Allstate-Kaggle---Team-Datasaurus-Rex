@@ -30,14 +30,6 @@ make_model = function(model_params, data_path, output_path){
   parallelize = model_params$parallelize
   create_submission = model_params$create_submission
   use_log = model_params$use_log
-    
-  # Add parallelization
-  if(parallelize & !exists("cl")){
-    library(doParallel)
-    cores.number = detectCores(all.tests = FALSE, logical = TRUE)
-    cl = makeCluster(2)
-    registerDoParallel(cl, cores=cores.number)
-  }
   
   # Read training and test data
   library(data.table)
@@ -175,10 +167,5 @@ make_model = function(model_params, data_path, output_path){
     submission = data.frame(id=test_ids, loss=predicted_loss)
     write.csv(submission, file = file.path(output_path, "kaggle_submission.csv"), row.names = FALSE)
     print("...Done!")
-  }
-  
-  # Stop parallel clusters
-  if(parallelize & !exists("cl")){
-    stopCluster(cl)
   }
 }
