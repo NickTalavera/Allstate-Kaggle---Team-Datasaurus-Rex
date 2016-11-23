@@ -26,10 +26,12 @@ if(!interactive()){
     model_file = args[1]
   }
 }
-
+if (exists("cl")) {
+  stopCluster(cl)
+}
 # Add parallelization
 library(doParallel)
-if(parallelize){
+if (parallelize){
   library(doParallel)
   cores.number = detectCores(all.tests = FALSE, logical = TRUE)
   cl = makeCluster(2)
