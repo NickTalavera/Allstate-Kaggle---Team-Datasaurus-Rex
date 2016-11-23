@@ -13,6 +13,5 @@ metric = 'MAE' # metric use for evaluating cross-validation
 
 # Misc parameters
 subset_ratio = .01 # for testing purposes (set to 1 for full data)
-parallelize = FALSE # parallelize the computation?
 create_submission = FALSE # create a submission for Kaggle?
 use_log = FALSE # take the log transform of the response?

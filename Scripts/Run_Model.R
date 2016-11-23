@@ -2,7 +2,7 @@
 
 # Script to run a model created from model_template.R
 # If model_file == "all", then all models in the model_output folder is run
-model_file = "xgboost_medium.R" # Run this model in interactive mode
+model_file = "all" # Run this model in interactive mode
 parallelize = TRUE # parallelize models?
 
 local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
@@ -26,13 +26,10 @@ if(!interactive()){
     model_file = args[1]
   }
 }
-if (exists("cl")) {
-  stopCluster(cl)
-}
+
 # Add parallelization
 library(doParallel)
 if (parallelize){
-  library(doParallel)
   cores.number = detectCores(all.tests = FALSE, logical = TRUE)
   cl = makeCluster(2)
   registerDoParallel(cl, cores=cores.number)
@@ -62,7 +59,7 @@ source(file.path(scripts_path, 'model_maker.R'))
 #   model_file - file name of the model
 # output:
 #   none
-run_model = function(model_file){
+run_model = function(model_file, output_path, models_path, data_path, make_model){
   
   # Create the time-stamped results directory
   model_name = gsub(".R", "", model_file)
@@ -103,7 +100,7 @@ if(model_file == "all"){
   modelFiles = modelFiles[modelFiles != 'model_template.R']
   
   if(parallelize){
-    parSapply(cl, modelFiles, run_model)
+    parSapply(cl, modelFiles, run_model, output_path, models_path, data_path, make_model)
   } else {
     sapply(modelFiles, run_model)
   }
