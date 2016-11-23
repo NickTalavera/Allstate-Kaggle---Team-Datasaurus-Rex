@@ -115,6 +115,9 @@ make_model = function(model_params, data_path, output_path){
                           summaryFunction = summary_function,
                           allowParallel = parallelize)
   
+  # Start the clock!
+  ptm <- proc.time()
+  
   # Run the model on the loss
   print("Running the model...")
   training_model <- train(x = sub_train, 
@@ -125,6 +128,9 @@ make_model = function(model_params, data_path, output_path){
                   metric = metric,
                   maximize = FALSE)
   print("...Done!")
+  
+  # Stop the clock
+  run_time = proc.time() - ptm
   
   # Estimated RMSE and MAE
   test.predicted <- predict(training_model, sub_test)
@@ -149,7 +155,7 @@ make_model = function(model_params, data_path, output_path){
   })
   
   # Output grid, control, time stamp, and model name
-  model_results = list(grid = model_grid, best_params = best_params,
+  model_results = list(grid = model_grid, best_params = best_params, run_time = run_time,
                        estimated_rmse = estimated_rmse, estimated_mae = estimated_mae,
                        cv_results = cv_results, name = method_name, time_stamp = Sys.time())
   save(model_results, file = file.path(output_path, "results.RData"))
