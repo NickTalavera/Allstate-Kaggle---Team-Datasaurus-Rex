@@ -1,10 +1,18 @@
-prefix = "22_11_gbm_small" #The beginning of the name of the files you want to run eg. "22_11" or "" for all
 library(doParallel)
 prefix = "" #The beginning of the name of the files you want to run eg. "22_11" or "" for all
 parallelize = TRUE
 # Add parallelization
+if (exists("cl")) {
+  stopCluster(cl)
+}
+
+# Add parallelization
+library(doParallel)
+if (exists("cl")) {
+  try({stopCluster(cl)})
+  try({remove(cl)})
+}
 if(parallelize){
-  library(doParallel)
   cores.number = detectCores(all.tests = FALSE, logical = TRUE)
   cl = makeCluster(2)
   registerDoParallel(cl, cores=cores.number)
@@ -32,6 +40,7 @@ if(parallelize){
 }
 
 # Stop parallel clusters
-if(parallelize){
-  stopCluster(cl)
+if (exists("cl")) {
+  try({stopCluster(cl)})
+  try({remove(cl)})
 }

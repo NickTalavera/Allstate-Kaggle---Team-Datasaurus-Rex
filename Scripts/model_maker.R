@@ -31,13 +31,13 @@ make_model = function(model_params, data_path, output_path){
   create_submission = model_params$create_submission
   use_log = model_params$use_log
     
-  # Add parallelization
-  if(parallelize & !exists("cl")){
-    library(doParallel)
-    cores.number = detectCores(all.tests = FALSE, logical = TRUE)
-    cl = makeCluster(2)
-    registerDoParallel(cl, cores=cores.number)
-  }
+#   # Add parallelization
+#   if(parallelize){
+#     library(doParallel)
+#     cores.number = detectCores(all.tests = FALSE, logical = TRUE)
+#     cl = makeCluster(2)
+#     registerDoParallel(cl, cores=cores.number)
+#   }
   
   # Read training and test data
   library(data.table)
@@ -178,7 +178,7 @@ make_model = function(model_params, data_path, output_path){
   }
   
   # Stop parallel clusters
-  if(parallelize & !exists("cl")){
-    stopCluster(cl)
-  }
+#   if(parallelize){
+#     stopCluster(cl)
+#   }
 }

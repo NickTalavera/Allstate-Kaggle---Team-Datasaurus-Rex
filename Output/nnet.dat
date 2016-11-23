@@ -1,0 +1,13 @@
+$estimated_mae
+[1] 2910.91
+
+$cv_results
+  size decay      MAE    MAESD
+1    2     0 3000.729 140.9524
+_________________________________________
+estimated_mae
+[1] 2910.91
+
+$cv_results
+  size decay      MAE    MAESD
+1    4     0 3000.729 140.9524
