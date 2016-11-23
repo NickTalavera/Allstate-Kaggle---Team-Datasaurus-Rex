@@ -21,7 +21,7 @@
 make_model = function(model_params, data_path, output_path){
   
   model_method = model_params$model_method
-  model_grid = model_params$model
+  model_grid = model_params$model_grid
   partition_ratio = model_params$partition_ratio
   cv_folds = model_params$cv_folds
   verbose_on = model_params$verbose_on
