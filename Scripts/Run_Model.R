@@ -2,11 +2,12 @@
 
 # Script to run a model created from model_template.R
 # If model_file == "all", then all models in the model_output folder is run
-model_file = "xgboost_medium.R" # Run this model in interactive mode
+model_file = "nnet_small.R" # Run this model in interactive mode
 parallelize = FALSE # parallelize models?
 
 local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
-server_dir = '~/ML'
+#server_dir = '~/ML'
+server_dir = '~/Allstate-Kaggle---Team-Datasaurus-Rex/'
 
 # Directory parameters
 data_path = "Data" # data path containing train and test sets
