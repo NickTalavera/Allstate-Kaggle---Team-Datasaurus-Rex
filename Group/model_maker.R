@@ -18,6 +18,35 @@
 # data_path - data path containing train and test sets
 # output_path - output path for storing results
 
+data_path = "Data" # data path containing train and test sets
+output_path = "Output" # output path for storing results
+
+# Create the output directory
+if (!dir.exists(output_path)) {
+  dir.create(output_path)
+}
+directory = file.path(output_path, 
+                      paste0(format(Sys.time(), "%d_%m_%Y_%H.%M.%S_"), model_method))
+dir.create(directory)
+
+# Copy this file to directory
+library(base)
+thisFile <- function() {
+  cmdArgs <- commandArgs(trailingOnly = FALSE)
+  needle <- "--file="
+  match <- grep(needle, cmdArgs)
+  if (length(match) > 0) {
+    # Rscript
+    return(file.path(script_dir, sub(needle, "", cmdArgs[match])))
+  } else {
+    # 'source'd via R console
+    return(normalizePath(sys.frames()[[1]]$ofile))
+  }
+}
+
+file.copy(thisFile(), to = file.path(directory, paste0(model_method, ".R")))
+
+
 # Add parallelization
 if(parallelize){
   library(doParallel)
