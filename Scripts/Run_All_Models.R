@@ -1,4 +1,4 @@
-prefix = "22_11_gbm_small" #The beginning of the name of the files you want to run eg. "22_11" or "" for all
+prefix = "" #The beginning of the name of the files you want to run eg. "22_11" or "" for all
 library(doParallel)
 prefix = "" #The beginning of the name of the files you want to run eg. "22_11" or "" for all
 parallelize = TRUE
