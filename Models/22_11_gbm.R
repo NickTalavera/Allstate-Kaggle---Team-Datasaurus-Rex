@@ -11,7 +11,7 @@ partition_ratio = .8 # for cross-validation
 cv_folds = 2 # for cross-validation 
 
 parallelize = TRUE # parallelize the computation?
-create_submission = FALSE # create a submission for Kaggle?
+create_submission = TRUE # create a submission for Kaggle?
 use_log = FALSE # take the log transform of the response?
 verbose_on = TRUE
 metric = 'MAE' # metric use for evaluating cross-validation
