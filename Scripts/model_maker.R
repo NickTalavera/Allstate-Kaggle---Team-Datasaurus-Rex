@@ -11,7 +11,6 @@
 # partition_ratio - proportion of training used for cross-validation
 # cv_folds - # folds for cross-validation 
 # 
-# parallelize - parallelize the computation?
 # create_submission - create a submission for kaggle?
 # use_log - take the log transform of the response?
 # use_mae_metric - use mean aboslute error for cross-validation?
@@ -28,17 +27,8 @@ make_model = function(model_params, data_path, output_path){
   verbose_on = model_params$verbose_on
   metric = model_params$metric
   subset_ratio = model_params$subset_ratio
-  parallelize = model_params$parallelize
   create_submission = model_params$create_submission
   use_log = model_params$use_log
-    
-#   # Add parallelization
-#   if(parallelize){
-#     library(doParallel)
-#     cores.number = detectCores(all.tests = FALSE, logical = TRUE)
-#     cl = makeCluster(2)
-#     registerDoParallel(cl, cores=cores.number)
-#   }
   
   # Read training and test data
   library(data.table)
@@ -52,6 +42,14 @@ make_model = function(model_params, data_path, output_path){
   # Store and remove ids
   test_ids = as_test$id
   as_test = as_test %>% dplyr::select(-id)
+  
+  #Remove columns where all factors had non-zero variance according to exploratory data analysis
+  removeableVariablesEDA = c("cat7","cat14", "cat15", "cat16", "cat17", "cat18", "cat19", "cat20", "cat21", "cat22", "cat24", "cat28", "cat29", "cat30", "cat31", 
+                             "cat32", "cat33", "cat34", "cat35", "cat39", "cat40", "cat41", "cat42", "cat43", "cat45", "cat46", "cat47", "cat48", "cat49", "cat51", 
+                             "cat52", "cat54", "cat55", "cat56", "cat57", "cat58", "cat59", "cat60", "cat61", "cat62", "cat63", "cat64", "cat65", "cat66", "cat67", 
+                             "cat68", "cat69", "cat70", "cat74", "cat76", "cat77", "cat78", "cat85", "cat89")
+  as_train[,removeableVariablesEDA] = NULL
+  as_test[,removeableVariablesEDA] = NULL
   
   # Subset the data
   library(caret)
@@ -114,7 +112,7 @@ make_model = function(model_params, data_path, output_path){
                           number = cv_folds,
                           verboseIter = verbose_on,
                           summaryFunction = summary_function,
-                          allowParallel = parallelize)
+                          allowParallel = TRUE)
   
   # Start the clock!
   ptm <- proc.time()
@@ -186,9 +184,5 @@ make_model = function(model_params, data_path, output_path){
     write.csv(submission, file = file.path(output_path, "kaggle_submission.csv"), row.names = FALSE)
     print("...Done!")
   }
-  
-  # Stop parallel clusters
-#   if(parallelize){
-#     stopCluster(cl)
-#   }
+
 }

@@ -22,9 +22,11 @@ if(!interactive()){
   args = commandArgs(trailingOnly=TRUE)
   # Test if there is at least one argument: if not, return an error
   if (length(args) == 0) {
-    stop("Usage: Run_Model [model.R]", call. = FALSE)
+    stop("Usage: Run_Model [model_1.R] [model_2.R] [model_3.R] ...", call. = FALSE)
   }else {
     model_file = args[1]
+    model_files = args
+    print(model_files)
   }
 }
 
@@ -91,7 +93,6 @@ run_model = function(model_file, output_path, models_path, data_path, make_model
                      verbose_on,
                      metric,
                      subset_ratio,
-                     parallelize,
                      create_submission,
                      use_log,
                      extra_params)
@@ -102,18 +103,19 @@ run_model = function(model_file, output_path, models_path, data_path, make_model
 
 # Run all models?
 if(model_file == "all"){
-  modelFiles = list.files(path = paste0(getwd(),"/",models_path), pattern= "*.R$", full.names = FALSE, ignore.case = TRUE)
-  modelFiles = modelFiles[modelFiles != 'model_template.R']
-  
-  if(parallelize){
-    parSapply(cl, modelFiles, run_model, output_path, models_path, data_path, make_model)
-  } else {
-    sapply(modelFiles, run_model, output_path, models_path, data_path, make_model)
-  }
-}else{
-  # Run the model
-  run_model(model_file, output_path, models_path, data_path, make_model)
+  model_files = list.files(path = paste0(getwd(),"/",models_path), pattern= "*.R$", full.names = FALSE, ignore.case = TRUE)
+  model_files = model_files[model_files != 'model_template.R']
 }
+print(model_files)
+if(parallelize){
+  parSapply(cl, model_files, run_model, output_path, models_path, data_path, make_model)
+} else{
+  sapply(model_files, run_model, output_path, models_path, data_path, make_model)
+}
+# }else{
+#   # Run the model
+#   run_model(model_file, output_path, models_path, data_path, make_model)
+# }
 
 # Stop parallel clusters
 if (exists("cl")) {
