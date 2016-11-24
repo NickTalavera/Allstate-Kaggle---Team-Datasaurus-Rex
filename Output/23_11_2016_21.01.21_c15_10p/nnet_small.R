@@ -3,7 +3,7 @@
 model_method = "nnet"
 #model_grid <- NULL
 #model_grid <- expand.grid(layer1 = c(5), layer2 = c(1), layer3 = c(1))
-model_grid <- expand.grid(size = c(5), decay = c(0.0))
+model_grid <- expand.grid(size = c(15), decay = c(0.0))
 extra_params = list(MaxNWts = 100000, linout = TRUE)
 
 # Cross-validation parameters

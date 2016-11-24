@@ -2,9 +2,9 @@
 #$ -q bigmem.q
 #$ -pe orte 32
 #$ -V
-#$ -N xgboost_full_no-log
+#$ -N nnet_small
 
 module load R/MRO_3.3.1
 export OMP_NUM_THREADS=32
 
-Rscript Run_Model.R xgboost_small.R > xgboost_full_no-log.out
+Rscript Run_Model.R nnet_small.R > nnet_small.out
