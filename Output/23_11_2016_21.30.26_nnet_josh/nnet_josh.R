@@ -1,12 +1,12 @@
 # Model parameters
 model_method = "nnet"
-model_grid = expand.grid(size  = c(20),
-                         decay = c(0.1))
+model_grid = expand.grid(size  = c(5),
+                         decay = c(0, 0.1))
 extra_params = list(MaxNWts = 100000, linout = TRUE)
 
 # Cross-validation parameters
 partition_ratio = .8 # for cross-validation
-cv_folds = 2 # for cross-validation
+cv_folds = 5 # for cross-validation
 verbose_on = TRUE # output cv folds results?
 metric = 'MAE' # metric use for evaluating cross-validation
 
