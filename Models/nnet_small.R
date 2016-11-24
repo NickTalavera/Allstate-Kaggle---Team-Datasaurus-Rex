@@ -1,8 +1,9 @@
 # Model parameters
+#model_method = "neuralnet"
 model_method = "nnet"
-library(nnet)
-model_grid <- expand.grid(size  = c(2,4,6,8),
-                          decay = 0)
+#model_grid <- NULL
+#model_grid <- expand.grid(layer1 = c(5), layer2 = c(1), layer3 = c(1))
+model_grid <- expand.grid(size = c(25), decay = c(0.5))
 
 # Cross-validation parameters
 partition_ratio = .8 # for cross-validation

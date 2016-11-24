@@ -1,0 +1,20 @@
+[1] "Copying model..."
+Read 37.2% of 188318 rowsRead 90.3% of 188318 rowsRead 188318 rows and 132 (of 132) columns from 0.065 GB file in 00:00:04
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
++ Fold1: size=25, decay=0.5 
+model fit failed for Fold1: size=25, decay=0.5 Error in nnet.default(x, y, w, ...) : too many (4001) weights
+ 
++ Fold2: size=25, decay=0.5 
+model fit failed for Fold2: size=25, decay=0.5 Error in nnet.default(x, y, w, ...) : too many (4001) weights
+ 
++ Fold3: size=25, decay=0.5 
+model fit failed for Fold3: size=25, decay=0.5 Error in nnet.default(x, y, w, ...) : too many (4001) weights
+ 
++ Fold4: size=25, decay=0.5 
+model fit failed for Fold4: size=25, decay=0.5 Error in nnet.default(x, y, w, ...) : too many (4001) weights
+ 
++ Fold5: size=25, decay=0.5 
+model fit failed for Fold5: size=25, decay=0.5 Error in nnet.default(x, y, w, ...) : too many (4001) weights
+ 
