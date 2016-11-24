@@ -107,15 +107,11 @@ if(model_file == "all"){
   model_files = model_files[model_files != 'model_template.R']
 }
 print(model_files)
-if(parallelize){
-  parSapply(cl, model_files, run_model, output_path, models_path, data_path, make_model)
-} else{
-  sapply(model_files, run_model, output_path, models_path, data_path, make_model)
-}
-# }else{
-#   # Run the model
-#   run_model(model_file, output_path, models_path, data_path, make_model)
-# }
+#if(parallelize){
+#  parSapply(cl, model_files, run_model, output_path, models_path, data_path, make_model)
+#} else{
+sapply(model_files, run_model, output_path, models_path, data_path, make_model)
+#}
 
 # Stop parallel clusters
 if (exists("cl")) {
