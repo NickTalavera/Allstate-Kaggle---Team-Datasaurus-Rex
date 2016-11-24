@@ -4,6 +4,7 @@ model_method = "nnet"
 #model_grid <- NULL
 #model_grid <- expand.grid(layer1 = c(5), layer2 = c(1), layer3 = c(1))
 model_grid <- expand.grid(size = c(25), decay = c(0.5))
+extra_params = list(MaxNWts = 100000)
 
 # Cross-validation parameters
 partition_ratio = .8 # for cross-validation
