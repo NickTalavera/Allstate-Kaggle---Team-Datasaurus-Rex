@@ -19,6 +19,9 @@
 # output_path - output path for storing results
 make_model = function(model_params, data_path, output_path){
   
+  # For reproducibility
+  set.seed(0)
+  
   model_method = model_params$model_method
   model_grid = model_params$model_grid
   extra_params = model_params$extra_params
@@ -29,51 +32,53 @@ make_model = function(model_params, data_path, output_path){
   subset_ratio = model_params$subset_ratio
   create_submission = model_params$create_submission
   use_log = model_params$use_log
+  do_cv = model_params$do_cv
   
   # Read training and test data
   library(data.table)
   library(dplyr)
-  as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE)
-  # Store and remove ids
-  train_ids = as_train$id
-  as_train = as_train %>% dplyr::select(-id)
-  
-  as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE)
-  # Store and remove ids
-  test_ids = as_test$id
-  as_test = as_test %>% dplyr::select(-id)
   
   #Remove columns where all factors had non-zero variance according to exploratory data analysis
   removeableVariablesEDA = c("cat7","cat14", "cat15", "cat16", "cat17", "cat18", "cat19", "cat20", "cat21", "cat22", "cat24", "cat28", "cat29", "cat30", "cat31", 
                              "cat32", "cat33", "cat34", "cat35", "cat39", "cat40", "cat41", "cat42", "cat43", "cat45", "cat46", "cat47", "cat48", "cat49", "cat51", 
                              "cat52", "cat54", "cat55", "cat56", "cat57", "cat58", "cat59", "cat60", "cat61", "cat62", "cat63", "cat64", "cat65", "cat66", "cat67", 
                              "cat68", "cat69", "cat70", "cat74", "cat76", "cat77", "cat78", "cat85", "cat89")
-  as_train[,removeableVariablesEDA] = NULL
-  as_test[,removeableVariablesEDA] = NULL
+  
+  as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE,
+                    drop = removeableVariablesEDA)
+  # Store and remove ids
+  train_ids = as_train$id
+  as_train = as_train %>% dplyr::select(-id)
+  
+  as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE,
+                   drop = removeableVariablesEDA)
+  # Store and remove ids
+  test_ids = as_test$id
+  as_test = as_test %>% dplyr::select(-id)
   
   # Subset the data
   library(caret)
-  set.seed(0)
   training_subset = createDataPartition(y = train_ids, p = subset_ratio, list = FALSE)
   as_train <- as_train[training_subset, ]
-  
-  # Transform the loss to log
-  if(use_log){
-    loss = log(as_train$loss + 1)
-  }else{
-    loss = as_train$loss
-  }
+
   
   # Pre-processing
   print("Pre-processing...")
   
+  # Transform the loss to log?
+  if(use_log){
+    loss = log(as_train$loss)
+  }else{
+    loss = as_train$loss
+  }
+
   # Convert categorical to dummy variables
   as_train = model.matrix(loss ~ . -1, data = as_train) # - 1 to ignore intercept
   as_test = model.matrix( ~ . -1, data = as_test)
   
   # Run caret's pre-processing methods
   preProc <- preProcess(as_train, 
-                        method = c("nzv"))
+                        method = c("nzv", "scale"))
   
   # Transform the predictors
   dm_train = predict(preProc, newdata = as_train)
@@ -81,7 +86,6 @@ make_model = function(model_params, data_path, output_path){
   print("...Done!")
   
   # Setting up the cross-validation
-  set.seed(0)
   
   # Partition training data into train and test split
   trainIdx <- createDataPartition(loss, 
@@ -92,6 +96,8 @@ make_model = function(model_params, data_path, output_path){
   sub_test <- dm_train[-trainIdx,]
   loss_train <- loss[trainIdx]
   loss_test <- loss[-trainIdx]
+  indices_train <- training_subset[trainIdx]
+  indices_test <- training_subset[-trainIdx]
   
   # Setting up the model
   library(Metrics)
@@ -108,7 +114,13 @@ make_model = function(model_params, data_path, output_path){
   }else{
     summary_function = defaultSummary
   }
-  fitCtrl <- trainControl(method = "cv",
+  
+  if(do_cv){
+    method = "cv"
+  }else{
+    method = "none"
+  }
+  fitCtrl <- trainControl(method = method,
                           number = cv_folds,
                           verboseIter = verbose_on,
                           summaryFunction = summary_function,
@@ -136,16 +148,34 @@ make_model = function(model_params, data_path, output_path){
   
   # Estimated RMSE and MAE
   test.predicted <- predict(training_model, sub_test)
+  
+  
+  # Transform prediction
   if(use_log){
-    test.predicted = exp(test.predicted) - 1
-    loss_test = exp(loss_test) - 1
+    test.predicted = exp(test.predicted)
+    loss_test = exp(loss_test)
   }
+
   estimated_rmse = postResample(pred = test.predicted, obs = loss_test)
   estimated_mae = Metrics::mae(loss_test, test.predicted)
   
   cv_results = training_model$results
   method_name = training_model$method
   best_params = training_model$bestTune
+  
+  # Print quick summary of results
+  print("Estimated RMSE:")
+  print(estimated_rmse)
+  print("Estimated MAE:")
+  print(estimated_mae)
+  print("Best Parameters:")
+  print(best_params)
+  print("Run time:")
+  print(run_time)
+  
+  # Output validation results
+  validation_results = data.frame(original_index = indices_test, predicted = test.predicted, 
+                                  loss = loss_test, abs_error = abs(test.predicted - loss_test))
   
   # Output plot
   tryCatch({
@@ -159,7 +189,8 @@ make_model = function(model_params, data_path, output_path){
   # Output grid, control, time stamp, and model name
   model_results = list(grid = model_grid, best_params = best_params, run_time = run_time,
                        estimated_rmse = estimated_rmse, estimated_mae = estimated_mae,
-                       cv_results = cv_results, name = method_name, time_stamp = Sys.time())
+                       cv_results = cv_results, name = method_name, time_stamp = Sys.time(),
+                       validation_results = validation_results)
   save(model_results, file = file.path(output_path, "results.RData"))
   
   # Create the Kaggle submission file
@@ -168,6 +199,7 @@ make_model = function(model_params, data_path, output_path){
     # Train final model on all of the data with best tuning parameters
     final_model = train(x = dm_train,
                         y = loss,
+                        trControl = trainControl(method = "none", summaryFunction = summary_function),
                         method = model_method,
                         tuneGrid = best_params,
                         metric = metric,

@@ -2,11 +2,10 @@
 
 # Script to run a model created from model_template.R
 # If model_file == "all", then all models in the model_output folder is run
-model_file = "all" # Run this model in interactive mode
+model_files = c("xgboost_small.R") # Run this model in interactive mode
 parallelize = TRUE # parallelize models?
 
 local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
-#server_dir = '~/ML'
 server_dir = '~/Allstate-Kaggle---Team-Datasaurus-Rex/'
 
 
@@ -24,7 +23,6 @@ if(!interactive()){
   if (length(args) == 0) {
     stop("Usage: Run_Model [model_1.R] [model_2.R] [model_3.R] ...", call. = FALSE)
   }else {
-    model_file = args[1]
     model_files = args
     print(model_files)
   }
@@ -75,7 +73,7 @@ run_model = function(model_file, output_path, models_path, data_path, make_model
   dir.create(model_output_path)
   
   # Copy the model R file to the results directory
-  print("Copying model...")
+  print("Copying model file...")
   file.copy(file.path(models_path, model_file), to = file.path(model_output_path, model_file))
   
   # Load model parameters
@@ -95,22 +93,23 @@ run_model = function(model_file, output_path, models_path, data_path, make_model
                      subset_ratio,
                      create_submission,
                      use_log,
-                     extra_params)
+                     extra_params,
+                     do_cv)
   
   # Run the model and output results
   make_model(model_params, data_path, model_output_path)
 }
 
 # Run all models?
-if(model_file == "all"){
+if(model_files[1] == "all"){
   model_files = list.files(path = paste0(getwd(),"/",models_path), pattern= "*.R$", full.names = FALSE, ignore.case = TRUE)
   model_files = model_files[model_files != 'model_template.R']
 }
-print(model_files)
+
 #if(parallelize){
 #  parSapply(cl, model_files, run_model, output_path, models_path, data_path, make_model)
 #} else{
-sapply(model_files, run_model, output_path, models_path, data_path, make_model)
+thanks_giving = sapply(model_files, run_model, output_path, models_path, data_path, make_model)
 #}
 
 # Stop parallel clusters

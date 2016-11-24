@@ -1,12 +1,13 @@
 # Model parameters
 model_method = "gbm"
-model_grid <- expand.grid( n.trees = c(100), 
-                           interaction.depth = 1, 
-                           shrinkage = 0.05,
+model_grid <- expand.grid( n.trees = c(500, 1000, 1500), 
+                           interaction.depth = 2:5, 
+                           shrinkage = 0.01,
                            n.minobsinnode = 20)
-extra_params = FALSE
+extra_params = NULL
 
 # Cross-validation parameters
+do_cv = TRUE # perform cross-validation?
 partition_ratio = .8 # for cross-validation
 cv_folds = 5 # for cross-validation
 verbose_on = TRUE # output cv folds results?
