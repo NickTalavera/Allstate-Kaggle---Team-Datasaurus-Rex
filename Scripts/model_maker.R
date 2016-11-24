@@ -11,7 +11,6 @@
 # partition_ratio - proportion of training used for cross-validation
 # cv_folds - # folds for cross-validation 
 # 
-# parallelize - parallelize the computation?
 # create_submission - create a submission for kaggle?
 # use_log - take the log transform of the response?
 # use_mae_metric - use mean aboslute error for cross-validation?
@@ -28,17 +27,8 @@ make_model = function(model_params, data_path, output_path){
   verbose_on = model_params$verbose_on
   metric = model_params$metric
   subset_ratio = model_params$subset_ratio
-  parallelize = model_params$parallelize
   create_submission = model_params$create_submission
   use_log = model_params$use_log
-    
-#   # Add parallelization
-#   if(parallelize){
-#     library(doParallel)
-#     cores.number = detectCores(all.tests = FALSE, logical = TRUE)
-#     cl = makeCluster(2)
-#     registerDoParallel(cl, cores=cores.number)
-#   }
   
   # Read training and test data
   library(data.table)
@@ -114,7 +104,7 @@ make_model = function(model_params, data_path, output_path){
                           number = cv_folds,
                           verboseIter = verbose_on,
                           summaryFunction = summary_function,
-                          allowParallel = parallelize)
+                          allowParallel = TRUE)
   
   # Start the clock!
   ptm <- proc.time()
@@ -186,9 +176,5 @@ make_model = function(model_params, data_path, output_path){
     write.csv(submission, file = file.path(output_path, "kaggle_submission.csv"), row.names = FALSE)
     print("...Done!")
   }
-  
-  # Stop parallel clusters
-#   if(parallelize){
-#     stopCluster(cl)
-#   }
+
 }
