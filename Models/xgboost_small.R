@@ -7,6 +7,7 @@ model_grid <- expand.grid(nrounds = c(1000, 2000, 4000),
                           colsample_bytree = 0.5,
                           min_child_weight = 1,
                           subsample = c(0.8))
+extra_params = NULL
 
 # Cross-validation parameters
 partition_ratio = .8 # for cross-validation

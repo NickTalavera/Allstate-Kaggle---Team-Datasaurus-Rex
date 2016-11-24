@@ -1,7 +1,8 @@
 # Model parameters
 model_method = "nnet"
-model_grid = expand.grid(size  = 25,
-                         decay = 0)
+model_grid = expand.grid(size  = c(50, 100),
+                         decay = c(0.1, 0.2))
+extra_params = list(MaxNWts = 100000)
 
 # Cross-validation parameters
 partition_ratio = .8 # for cross-validation

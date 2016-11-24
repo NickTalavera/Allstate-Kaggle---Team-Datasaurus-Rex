@@ -93,7 +93,8 @@ run_model = function(model_file, output_path, models_path, data_path, make_model
                      subset_ratio,
                      parallelize,
                      create_submission,
-                     use_log)
+                     use_log,
+                     extra_params)
   
   # Run the model and output results
   make_model(model_params, data_path, model_output_path)
