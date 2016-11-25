@@ -203,11 +203,11 @@ make_model = function(model_params, data_path, output_path){
                         method = model_method,
                         tuneGrid = best_params,
                         metric = metric,
-                        maximize = FALSE)
+                        maximize = FALSE,
+                        extra_params)
     
     # Get the predicted loss for the test set
-    #predicted_loss = predict(final_model, newdata = dm_test)
-    predicted_loss = predict(training_model, newdata = dm_test)
+    predicted_loss = predict(final_model, newdata = dm_test)
     if(use_log){
       predicted_loss = exp(predicted_loss) - shift
     }
