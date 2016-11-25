@@ -1,20 +1,20 @@
 # Model parameters
 model_method = "xgbTree"
-model_grid <- expand.grid(nrounds = c(1000, 2000),
-                          eta = c(0.01),
-                          max_depth = c(2, 4, 8, 16),
-                          gamma = 1,
+model_grid <- expand.grid(nrounds = 2813,
+                          eta = .01,
+                          max_depth = 12,
+                          gamma = 2,
                           colsample_bytree = 0.5,
                           min_child_weight = 1,
                           subsample = 0.8)
 extra_params = NULL
 
 # Cross-validation parameters
+do_cv = TRUE
 partition_ratio = .8 # for cross-validation
-cv_folds = 10 # for cross-validation
+cv_folds = 5 # for cross-validation
 verbose_on = TRUE # output cv folds results?
 metric = 'MAE' # metric use for evaluating cross-validation
-
 
 # Misc parameters
 subset_ratio = 1 # for testing purposes (set to 1 for full data)

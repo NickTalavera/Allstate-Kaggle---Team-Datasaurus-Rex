@@ -66,8 +66,9 @@ make_model = function(model_params, data_path, output_path){
   print("Pre-processing...")
   
   # Transform the loss to log?
+  shift = 200 # from forums
   if(use_log){
-    loss = log(as_train$loss + 1)
+    loss = log(as_train$loss + shift)
   }else{
     loss = as_train$loss
   }
@@ -104,7 +105,7 @@ make_model = function(model_params, data_path, output_path){
   maeSummary <- function (data,
                           lev = NULL,
                           model = NULL) {
-    out <- Metrics::mae(data$obs, data$pred)  
+    out <- Metrics::mae(exp(data$obs), exp(data$pred))  
     names(out) <- "MAE"
     out
   }
@@ -122,10 +123,10 @@ make_model = function(model_params, data_path, output_path){
   }
   fitCtrl <- trainControl(method = method,
                           number = cv_folds,
-                          verboseIter = verbose_on,
+                          verboseIter = TRUE,
                           summaryFunction = summary_function,
                           allowParallel = TRUE)
-  
+          
   # Start the clock!
   ptm <- proc.time()
   
@@ -139,7 +140,7 @@ make_model = function(model_params, data_path, output_path){
                     tuneGrid = model_grid, 
                     metric = metric,
                     maximize = FALSE),
-                extra_params)
+                    extra_params)
   training_model = do.call(train, args)
   print("...Done!")
   
@@ -152,8 +153,8 @@ make_model = function(model_params, data_path, output_path){
   
   # Transform prediction
   if(use_log){
-    test.predicted = exp(test.predicted) - 1
-    loss_test = exp(loss_test) - 1
+    test.predicted = exp(test.predicted) - shift
+    loss_test = exp(loss_test) - shift
   }
 
   estimated_rmse = postResample(pred = test.predicted, obs = loss_test)
@@ -208,7 +209,7 @@ make_model = function(model_params, data_path, output_path){
     #predicted_loss = predict(final_model, newdata = dm_test)
     predicted_loss = predict(training_model, newdata = dm_test)
     if(use_log){
-      predicted_loss = exp(predicted_loss) - 1
+      predicted_loss = exp(predicted_loss) - shift
     }
     
     # Output Kaggle submission

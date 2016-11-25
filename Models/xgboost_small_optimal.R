@@ -1,10 +1,10 @@
 # Model parameters
 model_method = "xgbTree"
-model_grid <- expand.grid(nrounds = 1000,
-                          eta = .01,
-                          max_depth = 4,
-                          gamma = 0,
-                          colsample_bytree = 0.8,
+model_grid <- expand.grid(nrounds = 2000,
+                          eta = .05,
+                          max_depth = 12,
+                          gamma = 2,
+                          colsample_bytree = 0.5,
                           min_child_weight = 1,
                           subsample = 0.8)
 extra_params = NULL
@@ -18,5 +18,5 @@ metric = 'MAE' # metric use for evaluating cross-validation
 
 # Misc parameters
 subset_ratio = .01 # for testing purposes (set to 1 for full data)
-create_submission = FALSE # create a submission for Kaggle?
+create_submission = TRUE # create a submission for Kaggle?
 use_log = TRUE # take the log transform of the response?
