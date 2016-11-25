@@ -67,7 +67,7 @@ make_model = function(model_params, data_path, output_path){
   
   # Transform the loss to log?
   if(use_log){
-    loss = log(as_train$loss)
+    loss = log(as_train$loss + 1)
   }else{
     loss = as_train$loss
   }
@@ -152,8 +152,8 @@ make_model = function(model_params, data_path, output_path){
   
   # Transform prediction
   if(use_log){
-    test.predicted = exp(test.predicted)
-    loss_test = exp(loss_test)
+    test.predicted = exp(test.predicted) - 1
+    loss_test = exp(loss_test) - 1
   }
 
   estimated_rmse = postResample(pred = test.predicted, obs = loss_test)
