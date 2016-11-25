@@ -88,25 +88,25 @@ xg_eval_mae <- function (yhat, dtrain) {
 
 ## Commented out in order to run within Kaggle sript time restrictions
 ## Uncoment and run locally to get best_nrounds of 2813 if used with eta = 0.01
-#res = xgb.cv(xgb_params,
-#             dtrain,
-#             nrounds=5000,
-#             nfold=5,
-#             early_stopping_rounds=15,
-#             print_every_n = 10,
-#             verbose= 1,
-#             feval=xg_eval_mae,
-#             maximize=FALSE)
-#
-##best_nrounds = res$best_iteration # for xgboost v0.6 users 
-#best_nrounds = which.min(res$dt[, test.error.mean]) # for xgboost v0.4-4 users 
-# 
-#cv_mean = res$evaluation_log$test_error_mean[best_nrounds]
-#cv_std = res$evaluation_log$test_error_std[best_nrounds]
-#cat(paste0('CV-Mean: ',cv_mean,' ', cv_std))
+res = xgb.cv(xgb_params,
+            dtrain,
+            nrounds=50,
+            nfold=5,
+            early_stopping_rounds=15,
+            print_every_n = 10,
+            verbose= 1,
+            feval=xg_eval_mae,
+            maximize=FALSE)
+
+#best_nrounds = res$best_iteration # for xgboost v0.6 users 
+best_nrounds = which.min(res$test.error.mean) # for xgboost v0.4-4 users 
+
+cv_mean = res$test.error.mean[best_nrounds]
+cv_std = res$test.error.std[best_nrounds]
+cat(paste0('CV-Mean: ',cv_mean,' ', cv_std))
 
 # established best _nrounds with eta=0.05 from a local cv run 
-best_nrounds = 545 # comment this out when doing local 1113 run
+#best_nrounds = 545 # comment this out when doing local 1113 run
 
 gbdt = xgb.train(xgb_params, dtrain, nrounds=as.integer(best_nrounds/0.8))
 
