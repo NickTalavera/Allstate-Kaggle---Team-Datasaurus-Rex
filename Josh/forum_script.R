@@ -21,7 +21,7 @@ SHIFT = 200
 
 TRAIN_FILE = "../Data/train.csv"
 TEST_FILE = "../Data/test.csv"
-SUBMISSION_FILE = "sample_submission.csv"
+SUBMISSION_FILE = "../Data/sample_submission.csv"
 
 
 train = fread(TRAIN_FILE, showProgress = TRUE)
