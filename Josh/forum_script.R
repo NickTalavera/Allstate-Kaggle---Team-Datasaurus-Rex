@@ -21,7 +21,7 @@ SHIFT = 200
 
 TRAIN_FILE = "../Data/train.csv"
 TEST_FILE = "../Data/test.csv"
-SUBMISSION_FILE = "sample_submission.csv"
+SUBMISSION_FILE = "../Data/sample_submission.csv"
 
 
 train = fread(TRAIN_FILE, showProgress = TRUE)
@@ -68,7 +68,7 @@ dtest = xgb.DMatrix(as.matrix(x_test))
 xgb_params = list(
   colsample_bytree = 0.5,
   subsample = 0.8,
-  eta = 0.05, # replace this with 0.01 for local run to achieve 1113.93
+  eta = 0.01, # replace this with 0.01 for local run to achieve 1113.93
   objective = 'reg:linear',
   max_depth = 12,
   alpha = 1,
@@ -105,7 +105,7 @@ cv_std = res$evaluation_log$test_error_std[best_nrounds]
 cat(paste0('CV-Mean: ',cv_mean,' ', cv_std))
 
 # established best _nrounds with eta=0.05 from a local cv run 
-best_nrounds = 545 # comment this out when doing local 1113 run
+# best_nrounds = 545 # comment this out when doing local 1113 run
 
 set.seed(0)
 gbdt = xgb.train(xgb_params, dtrain, nrounds=as.integer(best_nrounds/0.8))
