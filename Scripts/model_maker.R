@@ -199,14 +199,14 @@ make_model = function(model_params, data_path, output_path){
     # Train final model on all of the data with best tuning parameters
     final_model = train(x = dm_train,
                         y = loss,
-                        trControl = trainControl(method = "none", summaryFunction = summary_function),
                         method = model_method,
                         tuneGrid = best_params,
                         metric = metric,
                         maximize = FALSE)
     
     # Get the predicted loss for the test set
-    predicted_loss = predict(final_model, newdata = dm_test)
+    #predicted_loss = predict(final_model, newdata = dm_test)
+    predicted_loss = predict(training_model, newdata = dm_test)
     if(use_log){
       predicted_loss = exp(predicted_loss) - 1
     }
