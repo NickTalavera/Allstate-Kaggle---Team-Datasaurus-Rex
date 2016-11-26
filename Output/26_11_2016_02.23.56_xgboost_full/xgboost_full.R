@@ -7,7 +7,7 @@ model_grid <- expand.grid(nrounds = 2813,
                           colsample_bytree = 0.5,
                           min_child_weight = 1,
                           subsample = 0.8)
-extra_params = NULL
+extra_params = list(alpha = 1)
 
 # Cross-validation parameters
 do_cv = FALSE
