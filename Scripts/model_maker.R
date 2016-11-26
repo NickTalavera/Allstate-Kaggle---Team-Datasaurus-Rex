@@ -44,14 +44,12 @@ make_model = function(model_params, data_path, output_path){
                              "cat52", "cat54", "cat55", "cat56", "cat57", "cat58", "cat59", "cat60", "cat61", "cat62", "cat63", "cat64", "cat65", "cat66", "cat67", 
                              "cat68", "cat69", "cat70", "cat74", "cat76", "cat77", "cat78", "cat85", "cat89")
   
-  as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE,
-                    drop = removeableVariablesEDA)
+  as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE)
   # Store and remove ids
   train_ids = as_train$id
   as_train = as_train %>% dplyr::select(-id)
   
-  as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE,
-                   drop = removeableVariablesEDA)
+  as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE)
   # Store and remove ids
   test_ids = as_test$id
   as_test = as_test %>% dplyr::select(-id)
@@ -79,7 +77,7 @@ make_model = function(model_params, data_path, output_path){
   
   # Run caret's pre-processing methods
   preProc <- preProcess(as_train, 
-                        method = c("nzv"))
+                        method = c("nzv", "scale", "center"))
   
   # Transform the predictors
   dm_train = predict(preProc, newdata = as_train)
@@ -117,11 +115,12 @@ make_model = function(model_params, data_path, output_path){
   }
   
   if(do_cv){
-    method = "cv"
+    train_method = "cv"
   }else{
-    method = "none"
+    train_method = "none"
   }
-  fitCtrl <- trainControl(method = method,
+  
+  fitCtrl <- trainControl(method = train_method,
                           number = cv_folds,
                           verboseIter = TRUE,
                           summaryFunction = summary_function,
@@ -217,7 +216,7 @@ make_model = function(model_params, data_path, output_path){
     
     # Output Kaggle submission
     submission = data.frame(id=test_ids, loss=predicted_loss)
-    write.csv(submission, file = file.path(output_path, "kaggle_submission.csv"), row.names = FALSE)
+    write.csv(submission, file = file.path(output_path, paste0(method_name, "_submission.csv")), row.names = FALSE)
     print("...Done!")
   }
 
