@@ -17,6 +17,6 @@ verbose_on = TRUE # output cv folds results?
 metric = 'MAE' # metric use for evaluating cross-validation
 
 # Misc parameters
-subset_ratio = 1 # for testing purposes (set to 1 for full data)
+subset_ratio = .5 # for testing purposes (set to 1 for full data)
 create_submission = TRUE # create a submission for Kaggle?
 use_log = TRUE # take the log transform of the response?
