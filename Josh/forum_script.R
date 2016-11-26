@@ -53,12 +53,12 @@ features_to_drop <- c("cat67","cat21","cat60","cat65", "cat32", "cat30",
                       "cat33", "cat34", "cat46", "cat47", "cat48", "cat68",
                       "cat35", "cat20", "cat69", "cat70", "cat15", "cat62")
 
-x_train = train_test[1:ntrain,-features_to_drop, with = FALSE]
-x_test = train_test[(ntrain+1):nrow(train_test),-features_to_drop, with = FALSE]
+# x_train = train_test[1:ntrain,-features_to_drop, with = FALSE]
+# x_test = train_test[(ntrain+1):nrow(train_test),-features_to_drop, with = FALSE]
 
 ## for 1113 local run comment out above and uncoment below
-#x_train = train_test[1:ntrain,]
-#x_test = train_test[(ntrain+1):nrow(train_test),]
+x_train = train_test[1:ntrain,]
+x_test = train_test[(ntrain+1):nrow(train_test),]
 
 
 dtrain = xgb.DMatrix(as.matrix(x_train), label=y_train)
@@ -90,7 +90,7 @@ xg_eval_mae <- function (yhat, dtrain) {
 ## Uncoment and run locally to get best_nrounds of 2813 if used with eta = 0.01
 res = xgb.cv(xgb_params,
             dtrain,
-            nrounds=50,
+            nrounds=900,
             nfold=5,
             early_stopping_rounds=15,
             print_every_n = 10,
