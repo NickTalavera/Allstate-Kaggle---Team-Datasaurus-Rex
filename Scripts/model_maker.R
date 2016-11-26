@@ -79,7 +79,7 @@ make_model = function(model_params, data_path, output_path){
   
   # Run caret's pre-processing methods
   preProc <- preProcess(as_train, 
-                        method = c("nzv", "scale"))
+                        method = c("nzv"))
   
   # Transform the predictors
   dm_train = predict(preProc, newdata = as_train)
@@ -198,15 +198,18 @@ make_model = function(model_params, data_path, output_path){
   if(create_submission){
     print("Training final model for Kaggle...")
     # Train final model on all of the data with best tuning parameters
-    final_model = train(x = dm_train,
-                        y = loss,
-                        method = model_method,
-                        tuneGrid = best_params,
-                        metric = metric,
-                        maximize = FALSE,
-                        extra_params)
+    args = append(list(x = dm_train, 
+                       y = loss, 
+                       method = model_method, 
+                       trControl = fitCtrl, 
+                       tuneGrid = best_params, 
+                       metric = metric,
+                       maximize = FALSE),
+                  extra_params)
+    final_model = do.call(train, args)
     
     # Get the predicted loss for the test set
+    print("Outputting prediction...")
     predicted_loss = predict(final_model, newdata = dm_test)
     if(use_log){
       predicted_loss = exp(predicted_loss) - shift
