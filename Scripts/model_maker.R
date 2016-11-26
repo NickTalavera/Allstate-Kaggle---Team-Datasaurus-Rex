@@ -44,12 +44,14 @@ make_model = function(model_params, data_path, output_path){
                              "cat52", "cat54", "cat55", "cat56", "cat57", "cat58", "cat59", "cat60", "cat61", "cat62", "cat63", "cat64", "cat65", "cat66", "cat67", 
                              "cat68", "cat69", "cat70", "cat74", "cat76", "cat77", "cat78", "cat85", "cat89")
   
-  as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE)
+  as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE,
+                    drop = removeableVariablesEDA)
   # Store and remove ids
   train_ids = as_train$id
   as_train = as_train %>% dplyr::select(-id)
   
-  as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE)
+  as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE,
+                   drop = removeableVariablesEDA)
   # Store and remove ids
   test_ids = as_test$id
   as_test = as_test %>% dplyr::select(-id)
@@ -100,6 +102,7 @@ make_model = function(model_params, data_path, output_path){
   
   # Setting up the model
   library(Metrics)
+  
   maeSummary <- function (data,
                           lev = NULL,
                           model = NULL) {
@@ -125,6 +128,12 @@ make_model = function(model_params, data_path, output_path){
                           verboseIter = TRUE,
                           summaryFunction = summary_function,
                           allowParallel = TRUE)
+  
+#   fitCtrl <- trainControl('adaptive_cv', number=4, repeats=3,
+#                        summaryFunction=summary_function,
+#                        verboseIter=TRUE,
+#                        adaptive=list(min=3, alpha=0.05, method='gls',
+#                                     complete=TRUE))
           
   # Start the clock!
   ptm <- proc.time()
@@ -153,7 +162,7 @@ make_model = function(model_params, data_path, output_path){
   # Transform prediction
   if(use_log){
     test.predicted = exp(test.predicted) - shift
-    loss_test = exp(loss_test) - shift
+    #loss_test = exp(loss_test) - shift
   }
 
   estimated_rmse = postResample(pred = test.predicted, obs = loss_test)
