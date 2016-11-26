@@ -2,9 +2,9 @@
 #$ -q bigmem.q
 #$ -pe orte 32
 #$ -V
-#$ -N xgboost_small
+#$ -N two_run
 
 module load R/MRO_3.3.1
 export OMP_NUM_THREADS=32
 
-Rscript Run_Model.R xgboost_small.R  > xgboost_small.out
+Rscript Run_Model.R xgboost_full.R nnet_full.R   > two_run.out

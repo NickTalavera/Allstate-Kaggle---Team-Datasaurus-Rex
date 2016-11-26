@@ -1,6 +1,7 @@
 # Model parameters
 model_method = "nnet"
-model_grid = expand.grid(size  = c(5),decay = c(0, 0.1))
+model_grid = expand.grid(size  = c(20),
+                         decay = c(0.1))
 extra_params = list(MaxNWts = 100000, linout = TRUE)
 
 # Cross-validation parameters

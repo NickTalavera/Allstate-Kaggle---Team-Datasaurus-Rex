@@ -1,0 +1,10 @@
+#$ -cwd
+#$ -q doro.q
+#$ -pe orte 32
+#$ -V
+#$ -N xgboost_full
+
+module load R/MRO_3.3.1
+export OMP_NUM_THREADS=32
+
+Rscript Run_Model.R xgboost_full.R   > xgboost_full.out

@@ -1,8 +1,8 @@
 # Model parameters
 model_method = "xgbTree"
-model_grid <- expand.grid(nrounds = c(1000, 2000, 4000),
+model_grid <- expand.grid(nrounds = c(100),
                           eta = c(0.01),
-                          max_depth = c(2, 4, 8, 16),
+                          max_depth = c(2),
                           gamma = 1,
                           colsample_bytree = 0.5,
                           min_child_weight = 1,

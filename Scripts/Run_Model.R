@@ -1,9 +1,9 @@
 #!/usr/bin/env Rscript
-
+ptm <- proc.time()
 # Script to run a model created from model_template.R
 # If model_file == "all", then all models in the model_output folder is run
 model_file = "all" # Run this model in interactive mode
-parallelize = TRUE # parallelize models?
+parallelize = FALSE # parallelize models?
 
 local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
 #server_dir = '~/ML'
@@ -107,18 +107,15 @@ if(model_file == "all"){
   model_files = model_files[model_files != 'model_template.R']
 }
 print(model_files)
-if(parallelize){
-  parSapply(cl, model_files, run_model, output_path, models_path, data_path, make_model)
-} else{
-  sapply(model_files, run_model, output_path, models_path, data_path, make_model)
-}
-# }else{
-#   # Run the model
-#   run_model(model_file, output_path, models_path, data_path, make_model)
-# }
+#if(parallelize){
+#  parSapply(cl, model_files, run_model, output_path, models_path, data_path, make_model)
+#} else{
+sapply(model_files, run_model, output_path, models_path, data_path, make_model)
+#}
 
 # Stop parallel clusters
 if (exists("cl")) {
   try({stopCluster(cl)})
   try({remove(cl)})
 }
+proc.time() - ptm
