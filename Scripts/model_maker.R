@@ -67,7 +67,7 @@ make_model = function(model_params, data_path, output_path){
   
   # Transform the loss to log?
   loss = as_train$loss
-  shift = 200 # from forums
+  shift = 1 # from forums
   if(use_log){
     loss = log(loss + shift)
   }

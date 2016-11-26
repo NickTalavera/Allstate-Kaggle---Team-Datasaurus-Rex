@@ -1,15 +1,14 @@
 # Model parameters
-# We tune these first as they will have the highest impact on model outcome. 
-# To start with, let’s set wider ranges and then we will perform another iteration for smaller ranges.
-# From part 1, 110 rounds gave optimal parameters
+# Lets go one step deeper and look for optimum values. 
+# We’ll search for values 1 above and below the optimum values because we took an interval of two.
 # Source: https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/
 model_method = "xgbTree"
 model_grid = expand.grid(nrounds = 110,
                eta = .1,
-               max_depth = seq(3, 10, 2),
+               max_depth = c(2, 3, 4),
                gamma = 0,
                colsample_bytree = 0.5,
-               min_child_weight = seq(1, 6, 2),
+               min_child_weight = c(4, 5, 6),
                subsample = 0.8)
 extra_params = NULL
 

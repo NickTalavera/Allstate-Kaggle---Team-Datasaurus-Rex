@@ -15,7 +15,7 @@
 # Source: https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/
 
 model_method = "xgbTree"
-model_grid = expand.grid(nrounds = 2000,
+model_grid = expand.grid(nrounds = seq(10, 200, 10),
                eta = .1,
                max_depth = 5,
                gamma = 0,

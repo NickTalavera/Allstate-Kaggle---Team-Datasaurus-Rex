@@ -1,0 +1,74 @@
+[1] "xgboost_small_pt_7.R"
+[1] "Copying model file..."
+Read 90.3% of 188318 rowsRead 188318 rows and 78 (of 132) columns from 0.065 GB file in 00:00:03
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting nrounds = 98, max_depth = 4, eta = 0.1, gamma = 0.8, colsample_bytree = 0.6, min_child_weight = 4, subsample = 0.8 on full training set
+[1] "...Done!"
+eXtreme Gradient Boosting 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 1356, 1357, 1358, 1357, 1357, 1358, ... 
+Resampling results across tuning parameters:
+
+  colsample_bytree  subsample  MAE     
+  0.6               0.2        1353.679
+  0.6               0.3        1336.653
+  0.6               0.4        1339.287
+  0.6               0.5        1312.048
+  0.6               0.6        1322.858
+  0.6               0.7        1319.832
+  0.6               0.8        1306.852
+  0.6               0.9        1326.299
+  0.7               0.2        1364.024
+  0.7               0.3        1340.025
+  0.7               0.4        1324.834
+  0.7               0.5        1317.085
+  0.7               0.6        1315.276
+  0.7               0.7        1312.780
+  0.7               0.8        1307.171
+  0.7               0.9        1312.328
+  0.8               0.2        1342.368
+  0.8               0.3        1329.285
+  0.8               0.4        1329.003
+  0.8               0.5        1318.528
+  0.8               0.6        1311.806
+  0.8               0.7        1316.248
+  0.8               0.8        1311.472
+  0.8               0.9        1318.590
+  0.9               0.2        1339.359
+  0.9               0.3        1335.144
+  0.9               0.4        1341.909
+  0.9               0.5        1315.922
+  0.9               0.6        1306.940
+  0.9               0.7        1327.261
+  0.9               0.8        1321.177
+  0.9               0.9        1313.068
+
+Tuning parameter 'nrounds' was held constant at a value of 98
+Tuning
+ held constant at a value of 0.8
+Tuning parameter 'min_child_weight' was
+ held constant at a value of 4
+MAE was used to select the optimal model using  the smallest value.
+The final values used for the model were nrounds = 98, max_depth = 4, eta
+ = 0.1, gamma = 0.8, colsample_bytree = 0.6, min_child_weight = 4 and
+ subsample = 0.8. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2196.0010818    0.4882087 
+[1] "Estimated MAE:"
+[1] 1260.922
+[1] "Best Parameters:"
+  nrounds max_depth eta gamma colsample_bytree min_child_weight subsample
+7      98         4 0.1   0.8              0.6                4       0.8
+[1] "Run time:"
+   user  system elapsed 
+  7.092   1.607 172.917 

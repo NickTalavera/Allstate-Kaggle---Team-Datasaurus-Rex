@@ -1,0 +1,52 @@
+[1] "xgboost_small_pt_5.R"
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting nrounds = 110, max_depth = 4, eta = 0.1, gamma = 0.8, colsample_bytree = 0.5, min_child_weight = 4, subsample = 0.8 on full training set
+[1] "...Done!"
+eXtreme Gradient Boosting 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 1356, 1357, 1358, 1357, 1357, 1358, ... 
+Resampling results across tuning parameters:
+
+  gamma  MAE     
+  0.0    1301.814
+  0.1    1313.385
+  0.2    1329.220
+  0.3    1312.663
+  0.4    1320.123
+  0.5    1323.048
+  0.6    1311.424
+  0.7    1297.105
+  0.8    1294.389
+  0.9    1299.266
+  1.0    1316.724
+
+Tuning parameter 'nrounds' was held constant at a value of 110
+Tuning
+ parameter 'min_child_weight' was held constant at a value of 4
+
+Tuning parameter 'subsample' was held constant at a value of 0.8
+MAE was used to select the optimal model using  the smallest value.
+The final values used for the model were nrounds = 110, max_depth = 4, eta
+ = 0.1, gamma = 0.8, colsample_bytree = 0.5, min_child_weight = 4 and
+ subsample = 0.8. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2124.3846452    0.5226351 
+[1] "Estimated MAE:"
+[1] 1251.901
+[1] "Best Parameters:"
+  nrounds max_depth eta gamma colsample_bytree min_child_weight subsample
+9     110         4 0.1   0.8              0.5                4       0.8
+[1] "Run time:"
+   user  system elapsed 
+  7.014   1.472  65.419 
