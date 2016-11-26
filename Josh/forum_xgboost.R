@@ -28,7 +28,11 @@ train = fread(TRAIN_FILE, showProgress = TRUE)
 test = fread(TEST_FILE, showProgress = TRUE)
 
 # for testing with our system
-# train = train[1:1000, ]
+subset_ratio = 0.01
+library(caret)
+
+training_subset = createDataPartition(y = train$id, p = subset_ratio, list = FALSE)
+train <- train[training_subset, ]
 
 y_train = log(train[,TARGET, with = FALSE] + SHIFT)[[TARGET]]
 
@@ -72,10 +76,10 @@ xgb_params = list(
   eta = 0.05, 
   objective = 'reg:linear',
   max_depth = 12,
-  alpha = 1,
+  #alpha = 1,
   gamma = 2,
-  min_child_weight = 1,
-  base_score = 7.76
+  min_child_weight = 1
+  #base_score = 7.76
 )
 
 xg_eval_mae <- function (yhat, dtrain) {

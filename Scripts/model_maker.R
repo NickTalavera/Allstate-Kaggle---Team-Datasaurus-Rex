@@ -44,14 +44,20 @@ make_model = function(model_params, data_path, output_path){
                              "cat52", "cat54", "cat55", "cat56", "cat57", "cat58", "cat59", "cat60", "cat61", "cat62", "cat63", "cat64", "cat65", "cat66", "cat67", 
                              "cat68", "cat69", "cat70", "cat74", "cat76", "cat77", "cat78", "cat85", "cat89")
   
-  as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE,
-                    drop = removeableVariablesEDA)
+#   as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE,
+#                     drop = removeableVariablesEDA)
+  
+  as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE)
+  
   # Store and remove ids
   train_ids = as_train$id
   as_train = as_train %>% dplyr::select(-id)
   
-  as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE,
-                   drop = removeableVariablesEDA)
+#   as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE,
+#                    drop = removeableVariablesEDA)
+  
+  as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE)
+  
   # Store and remove ids
   test_ids = as_test$id
   as_test = as_test %>% dplyr::select(-id)
@@ -60,6 +66,7 @@ make_model = function(model_params, data_path, output_path){
   library(caret)
   training_subset = createDataPartition(y = train_ids, p = subset_ratio, list = FALSE)
   as_train <- as_train[training_subset, ]
+  print(head(as_train))
 
   
   # Pre-processing
@@ -81,8 +88,11 @@ make_model = function(model_params, data_path, output_path){
                         method = c("nzv", "scale", "center"))
   
   # Transform the predictors
-  dm_train = predict(preProc, newdata = as_train)
-  dm_test = predict(preProc, newdata = as_test)
+  #dm_train = predict(preProc, newdata = as_train)
+  #dm_test = predict(preProc, newdata = as_test)
+  dm_train = as_train
+  dm_test = as_test
+  
   print("...Done!")
   
   # Setting up the cross-validation
