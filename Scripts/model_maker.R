@@ -66,11 +66,10 @@ make_model = function(model_params, data_path, output_path){
   print("Pre-processing...")
   
   # Transform the loss to log?
+  loss = as_train$loss
   shift = 200 # from forums
   if(use_log){
-    loss = log(as_train$loss + shift)
-  }else{
-    loss = as_train$loss
+    loss = log(loss + shift)
   }
 
   # Convert categorical to dummy variables
@@ -107,6 +106,7 @@ make_model = function(model_params, data_path, output_path){
                           lev = NULL,
                           model = NULL) {
     out <- Metrics::mae(exp(data$obs), exp(data$pred))  
+    #out <- Metrics::mae(data$obs, data$pred) 
     names(out) <- "MAE"
     out
   }
@@ -151,6 +151,7 @@ make_model = function(model_params, data_path, output_path){
                     extra_params)
   training_model = do.call(train, args)
   print("...Done!")
+  print(training_model)
   
   # Stop the clock
   run_time = proc.time() - ptm
@@ -158,11 +159,10 @@ make_model = function(model_params, data_path, output_path){
   # Estimated RMSE and MAE
   test.predicted <- predict(training_model, sub_test)
   
-  
   # Transform prediction
   if(use_log){
     test.predicted = exp(test.predicted) - shift
-    #loss_test = exp(loss_test) - shift
+    loss_test = exp(loss_test) - shift
   }
 
   estimated_rmse = postResample(pred = test.predicted, obs = loss_test)

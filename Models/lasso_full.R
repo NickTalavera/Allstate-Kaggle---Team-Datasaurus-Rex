@@ -1,5 +1,5 @@
 # Model parameters
-model_method = "xgbTree"
+model_method = "lasso"
 model_grid = NULL
 extra_params = NULL
 

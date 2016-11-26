@@ -1,5 +1,5 @@
 # Model parameters
-model_method = "xgbTree"
+model_method = "gbm"
 model_grid = NULL
 extra_params = NULL
 
