@@ -6,7 +6,7 @@ extra_params = NULL
 # Cross-validation parameters
 do_cv = TRUE
 partition_ratio = .8 # for cross-validation
-cv_folds = 2 # for cross-validation
+cv_folds = 10 # for cross-validation
 verbose_on = TRUE # output cv folds results?
 metric = 'MAE' # metric use for evaluating cross-validation
 

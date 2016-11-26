@@ -1,0 +1,401 @@
+[1] "lasso_small.R"   "ridge_small.R"   "knn_small.R"     "rf_small.R"     
+[5] "xgboost_small.R" "gbm_small.R"     "nnet_small.R"   
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting fraction = 0.5 on full training set
+[1] "...Done!"
+The lasso 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (2 fold) 
+Summary of sample sizes: 753, 755 
+Resampling results across tuning parameters:
+
+  fraction  MAE     
+  0.1       1389.438
+  0.5       1378.165
+  0.9       1429.030
+
+MAE was used to select the optimal model using  the smallest value.
+The final value used for the model was fraction = 0.5. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2388.5577028    0.3786285 
+[1] "Estimated MAE:"
+[1] 1319.647
+[1] "Best Parameters:"
+  fraction
+2      0.5
+[1] "Run time:"
+   user  system elapsed 
+  7.001   1.731  18.217 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting lambda = 0.1 on full training set
+[1] "...Done!"
+Ridge Regression 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (2 fold) 
+Summary of sample sizes: 753, 755 
+Resampling results across tuning parameters:
+
+  lambda  MAE     
+  0e+00   1442.228
+  1e-04   1435.434
+  1e-01   1383.047
+
+MAE was used to select the optimal model using  the smallest value.
+The final value used for the model was lambda = 0.1. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2413.4338342    0.3839672 
+[1] "Estimated MAE:"
+[1] 1347.49
+[1] "Best Parameters:"
+  lambda
+3    0.1
+[1] "Run time:"
+   user  system elapsed 
+  6.734   2.067  19.704 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting k = 9 on full training set
+[1] "...Done!"
+k-Nearest Neighbors 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (2 fold) 
+Summary of sample sizes: 753, 755 
+Resampling results across tuning parameters:
+
+  k  MAE     
+  5  1623.635
+  7  1606.374
+  9  1594.297
+
+MAE was used to select the optimal model using  the smallest value.
+The final value used for the model was k = 9. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2801.8812668    0.3311878 
+[1] "Estimated MAE:"
+[1] 1607.32
+[1] "Best Parameters:"
+  k
+3 9
+[1] "Run time:"
+   user  system elapsed 
+  5.506   2.327  13.146 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting mtry = 158 on full training set
+[1] "...Done!"
+Random Forest 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (2 fold) 
+Summary of sample sizes: 753, 755 
+Resampling results across tuning parameters:
+
+  mtry  MAE     
+    2   1525.031
+   80   1370.534
+  158   1363.081
+
+MAE was used to select the optimal model using  the smallest value.
+The final value used for the model was mtry = 158. 
+[1] "Estimated RMSE:"
+       RMSE    Rsquared 
+2331.491582    0.470431 
+[1] "Estimated MAE:"
+[1] 1361.53
+[1] "Best Parameters:"
+  mtry
+3  158
+[1] "Run time:"
+   user  system elapsed 
+ 62.724   1.823 116.510 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting nrounds = 150, max_depth = 1, eta = 0.3, gamma = 0, colsample_bytree = 0.8, min_child_weight = 1, subsample = 0.75 on full training set
+[1] "...Done!"
+eXtreme Gradient Boosting 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 1356, 1357, 1358, 1357, 1357, 1358, ... 
+Resampling results across tuning parameters:
+
+  eta  max_depth  colsample_bytree  subsample  nrounds  MAE     
+  0.3  1          0.6               0.50        50      1358.953
+  0.3  1          0.6               0.50       100      1333.620
+  0.3  1          0.6               0.50       150      1332.550
+  0.3  1          0.6               0.75        50      1351.754
+  0.3  1          0.6               0.75       100      1334.131
+  0.3  1          0.6               0.75       150      1336.945
+  0.3  1          0.6               1.00        50      1360.404
+  0.3  1          0.6               1.00       100      1336.982
+  0.3  1          0.6               1.00       150      1338.908
+  0.3  1          0.8               0.50        50      1354.921
+  0.3  1          0.8               0.50       100      1348.586
+  0.3  1          0.8               0.50       150      1337.925
+  0.3  1          0.8               0.75        50      1350.684
+  0.3  1          0.8               0.75       100      1331.837
+  0.3  1          0.8               0.75       150      1330.092
+  0.3  1          0.8               1.00        50      1363.380
+  0.3  1          0.8               1.00       100      1342.226
+  0.3  1          0.8               1.00       150      1338.005
+  0.3  2          0.6               0.50        50      1335.947
+  0.3  2          0.6               0.50       100      1339.551
+  0.3  2          0.6               0.50       150      1338.286
+  0.3  2          0.6               0.75        50      1336.983
+  0.3  2          0.6               0.75       100      1337.692
+  0.3  2          0.6               0.75       150      1351.745
+  0.3  2          0.6               1.00        50      1332.561
+  0.3  2          0.6               1.00       100      1335.666
+  0.3  2          0.6               1.00       150      1361.456
+  0.3  2          0.8               0.50        50      1352.593
+  0.3  2          0.8               0.50       100      1375.395
+  0.3  2          0.8               0.50       150      1418.506
+  0.3  2          0.8               0.75        50      1331.305
+  0.3  2          0.8               0.75       100      1352.667
+  0.3  2          0.8               0.75       150      1369.441
+  0.3  2          0.8               1.00        50      1332.914
+  0.3  2          0.8               1.00       100      1345.995
+  0.3  2          0.8               1.00       150      1353.339
+  0.3  3          0.6               0.50        50      1382.111
+  0.3  3          0.6               0.50       100      1420.713
+  0.3  3          0.6               0.50       150      1460.432
+  0.3  3          0.6               0.75        50      1371.227
+  0.3  3          0.6               0.75       100      1409.861
+  0.3  3          0.6               0.75       150      1436.963
+  0.3  3          0.6               1.00        50      1353.012
+  0.3  3          0.6               1.00       100      1378.269
+  0.3  3          0.6               1.00       150      1389.903
+  0.3  3          0.8               0.50        50      1373.233
+  0.3  3          0.8               0.50       100      1426.317
+  0.3  3          0.8               0.50       150      1474.653
+  0.3  3          0.8               0.75        50      1354.827
+  0.3  3          0.8               0.75       100      1394.983
+  0.3  3          0.8               0.75       150      1415.296
+  0.3  3          0.8               1.00        50      1335.984
+  0.3  3          0.8               1.00       100      1368.142
+  0.3  3          0.8               1.00       150      1387.958
+  0.4  1          0.6               0.50        50      1354.588
+  0.4  1          0.6               0.50       100      1356.230
+  0.4  1          0.6               0.50       150      1354.495
+  0.4  1          0.6               0.75        50      1353.735
+  0.4  1          0.6               0.75       100      1344.601
+  0.4  1          0.6               0.75       150      1344.142
+  0.4  1          0.6               1.00        50      1349.910
+  0.4  1          0.6               1.00       100      1336.048
+  0.4  1          0.6               1.00       150      1333.971
+  0.4  1          0.8               0.50        50      1355.499
+  0.4  1          0.8               0.50       100      1364.393
+  0.4  1          0.8               0.50       150      1364.766
+  0.4  1          0.8               0.75        50      1341.911
+  0.4  1          0.8               0.75       100      1339.885
+  0.4  1          0.8               0.75       150      1341.684
+  0.4  1          0.8               1.00        50      1349.046
+  0.4  1          0.8               1.00       100      1337.805
+  0.4  1          0.8               1.00       150      1335.673
+  0.4  2          0.6               0.50        50      1391.850
+  0.4  2          0.6               0.50       100      1410.817
+  0.4  2          0.6               0.50       150      1459.842
+  0.4  2          0.6               0.75        50      1347.559
+  0.4  2          0.6               0.75       100      1383.210
+  0.4  2          0.6               0.75       150      1411.494
+  0.4  2          0.6               1.00        50      1333.439
+  0.4  2          0.6               1.00       100      1367.926
+  0.4  2          0.6               1.00       150      1383.640
+  0.4  2          0.8               0.50        50      1390.175
+  0.4  2          0.8               0.50       100      1432.103
+  0.4  2          0.8               0.50       150      1446.469
+  0.4  2          0.8               0.75        50      1367.050
+  0.4  2          0.8               0.75       100      1391.449
+  0.4  2          0.8               0.75       150      1424.807
+  0.4  2          0.8               1.00        50      1345.888
+  0.4  2          0.8               1.00       100      1369.762
+  0.4  2          0.8               1.00       150      1384.927
+  0.4  3          0.6               0.50        50      1437.567
+  0.4  3          0.6               0.50       100      1469.066
+  0.4  3          0.6               0.50       150      1526.826
+  0.4  3          0.6               0.75        50      1383.370
+  0.4  3          0.6               0.75       100      1413.829
+  0.4  3          0.6               0.75       150      1456.707
+  0.4  3          0.6               1.00        50      1366.344
+  0.4  3          0.6               1.00       100      1403.409
+  0.4  3          0.6               1.00       150      1429.879
+  0.4  3          0.8               0.50        50      1434.122
+  0.4  3          0.8               0.50       100      1505.110
+  0.4  3          0.8               0.50       150      1544.850
+  0.4  3          0.8               0.75        50      1390.256
+  0.4  3          0.8               0.75       100      1426.770
+  0.4  3          0.8               0.75       150      1457.141
+  0.4  3          0.8               1.00        50      1343.359
+  0.4  3          0.8               1.00       100      1366.906
+  0.4  3          0.8               1.00       150      1385.377
+
+Tuning parameter 'gamma' was held constant at a value of 0
+Tuning
+ parameter 'min_child_weight' was held constant at a value of 1
+MAE was used to select the optimal model using  the smallest value.
+The final values used for the model were nrounds = 150, max_depth = 1, eta
+ = 0.3, gamma = 0, colsample_bytree = 0.8, min_child_weight = 1 and subsample
+ = 0.75. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2371.4290066    0.3862677 
+[1] "Estimated MAE:"
+[1] 1299.374
+[1] "Best Parameters:"
+   nrounds max_depth eta gamma colsample_bytree min_child_weight subsample
+15     150         1 0.3     0              0.8                1      0.75
+[1] "Run time:"
+   user  system elapsed 
+  6.151   2.036 131.370 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting n.trees = 100, interaction.depth = 3, shrinkage = 0.1, n.minobsinnode = 10 on full training set
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        0.5182             nan     0.1000    0.0302
+     2        0.4927             nan     0.1000    0.0260
+     3        0.4692             nan     0.1000    0.0194
+     4        0.4493             nan     0.1000    0.0172
+     5        0.4371             nan     0.1000    0.0120
+     6        0.4265             nan     0.1000    0.0101
+     7        0.4166             nan     0.1000    0.0076
+     8        0.4059             nan     0.1000    0.0090
+     9        0.3976             nan     0.1000    0.0079
+    10        0.3900             nan     0.1000    0.0060
+    20        0.3410             nan     0.1000    0.0025
+    40        0.2957             nan     0.1000    0.0001
+    60        0.2710             nan     0.1000   -0.0003
+    80        0.2550             nan     0.1000   -0.0003
+   100        0.2414             nan     0.1000   -0.0003
+
+[1] "...Done!"
+Stochastic Gradient Boosting 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (2 fold) 
+Summary of sample sizes: 753, 755 
+Resampling results across tuning parameters:
+
+  interaction.depth  n.trees  MAE     
+  1                   50      1427.414
+  1                  100      1365.215
+  1                  150      1344.761
+  2                   50      1378.609
+  2                  100      1335.716
+  2                  150      1317.397
+  3                   50      1350.572
+  3                  100      1312.095
+  3                  150      1318.162
+
+Tuning parameter 'shrinkage' was held constant at a value of 0.1
+
+Tuning parameter 'n.minobsinnode' was held constant at a value of 10
+MAE was used to select the optimal model using  the smallest value.
+The final values used for the model were n.trees = 100, interaction.depth =
+ 3, shrinkage = 0.1 and n.minobsinnode = 10. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2198.4932003    0.4909344 
+[1] "Estimated MAE:"
+[1] 1251.943
+[1] "Best Parameters:"
+  n.trees interaction.depth shrinkage n.minobsinnode
+8     100                 3       0.1             10
+[1] "Run time:"
+   user  system elapsed 
+  7.515   1.971  18.111 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting size = 1, decay = 0 on full training set
+# weights:  161
+initial  value 76904.315212 
+final  value 70030.378836 
+converged
+[1] "...Done!"
+Neural Network 
+
+1508 samples
+ 158 predictor
+
+No pre-processing
+Resampling: Cross-Validated (2 fold) 
+Summary of sample sizes: 753, 755 
+Resampling results across tuning parameters:
+
+  size  decay  MAE     
+  1     0e+00  3166.415
+  1     1e-04  3166.415
+  1     1e-01  3166.416
+  3     0e+00  3166.415
+  3     1e-04  3166.415
+  3     1e-01  3166.416
+  5     0e+00  3166.415
+  5     1e-04  3166.415
+  5     1e-01  3166.416
+
+MAE was used to select the optimal model using  the smallest value.
+The final values used for the model were size = 1 and decay = 0. 
+[1] "Estimated RMSE:"
+    RMSE Rsquared 
+4404.476       NA 
+[1] "Estimated MAE:"
+[1] 3241.369
+[1] "Best Parameters:"
+  size decay
+1    1     0
+[1] "Run time:"
+   user  system elapsed 
+  5.946   1.613  15.503 
