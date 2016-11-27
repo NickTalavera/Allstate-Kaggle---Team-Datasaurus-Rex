@@ -1,0 +1,35 @@
+[1] "nnet_full.R"
+[1] "nnet_full.R"
+[1] "Copying model..."
+Read 26.6% of 188318 rowsRead 79.7% of 188318 rowsRead 188318 rows and 132 (of 132) columns from 0.065 GB file in 00:00:04
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting size = 80, decay = 0.5 on full training set
+# weights:  12801
+initial  value 50866.785936 
+iter  10 value 1605.058897
+iter  20 value 1129.555709
+iter  30 value 703.409718
+iter  40 value 497.561399
+iter  50 value 361.629878
+iter  60 value 291.860445
+iter  70 value 249.760969
+iter  80 value 224.283827
+iter  90 value 206.820694
+iter 100 value 194.823089
+final  value 194.823089 
+stopped after 100 iterations
+[1] "...Done!"
+[1] "Training final model for Kaggle..."
+Something is wrong; all the RMSE metric values are missing:
+      RMSE        Rsquared  
+ Min.   : NA   Min.   : NA  
+ 1st Qu.: NA   1st Qu.: NA  
+ Median : NA   Median : NA  
+ Mean   :NaN   Mean   :NaN  
+ 3rd Qu.: NA   3rd Qu.: NA  
+ Max.   : NA   Max.   : NA  
+ NA's   :1     NA's   :1    

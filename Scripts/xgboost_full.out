@@ -1,0 +1,97 @@
+[1] "xgboost_full.R"
+[1] "xgboost_full.R"
+[1] "Copying model..."
+Read 21.2% of 188318 rowsRead 74.3% of 188318 rowsRead 188318 rows and 132 (of 132) columns from 0.065 GB file in 00:00:04
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
++ Fold01: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold01: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold01: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold01: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold01: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold01: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold01: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold01: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold02: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold02: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold02: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold02: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold02: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold02: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold02: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold02: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold03: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold03: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold03: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold03: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold03: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold03: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold03: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold03: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold04: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold04: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold04: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold04: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold04: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold04: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold04: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold04: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold05: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold05: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold05: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold05: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold05: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold05: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold05: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold05: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold06: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold06: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold06: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold06: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold06: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold06: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold06: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold06: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold07: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold07: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold07: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold07: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold07: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold07: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold07: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold07: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold08: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold08: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold08: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold08: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold08: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold08: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold08: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold08: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold09: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold09: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold09: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold09: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold09: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold09: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold09: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold09: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold10: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold10: eta=0.01, max_depth= 2, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold10: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold10: eta=0.01, max_depth= 4, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold10: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold10: eta=0.01, max_depth= 8, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
++ Fold10: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+- Fold10: eta=0.01, max_depth=16, gamma=1, colsample_bytree=0.5, min_child_weight=1, nrounds=2000 
+Aggregating results
+Selecting tuning parameters
+Fitting nrounds = 2000, max_depth = 8, eta = 0.01, gamma = 1, colsample_bytree = 0.5, min_child_weight = 1 on full training set
+[1] "...Done!"
+[1] "Training final model for Kaggle..."
+[1] "...Done!"
+xgboost_full.R 
+    "...Done!" 
+      user     system    elapsed 
+181126.968     77.949   5939.347 

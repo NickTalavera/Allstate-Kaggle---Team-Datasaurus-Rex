@@ -1,0 +1,7 @@
+Loading required package: foreach
+Loading required package: iterators
+Loading required package: parallel
+Error in file.path(output_path, paste0(format(Sys.time(), "%d_%m_%Y_%H.%M.%S_"),  : 
+  argument "output_path" is missing, with no default
+Calls: run_model -> file.path
+Execution halted

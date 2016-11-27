@@ -23,6 +23,8 @@ The following objects are masked from ‘package:base’:
 Loading required package: lattice
 Loading required package: ggplot2
 Loading required package: nnet
-Error in { : task 4 failed - "non-numeric argument to binary operator"
-Calls: run_model ... train.default -> nominalTrainWorkflow -> %op% -> <Anonymous>
+Error in train.default(x = dm_train, y = loss, method = model_method,  : 
+  Stopping
+Calls: sapply ... lapply -> FUN -> make_model -> train -> train.default
+In addition: There were 29 warnings (use warnings() to see them)
 Execution halted

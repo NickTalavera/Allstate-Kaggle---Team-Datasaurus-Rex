@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-
+ptm <- proc.time()
 # Script to run a model created from model_template.R
 # If model_file == "all", then all models in the model_output folder is run
 model_files = c("xgboost_full.R") # Run this model in interactive mode
@@ -117,3 +117,4 @@ if (exists("cl")) {
   try({stopCluster(cl)})
   try({remove(cl)})
 }
+proc.time() - ptm

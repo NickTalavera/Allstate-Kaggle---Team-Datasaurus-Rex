@@ -45,6 +45,7 @@ make_model = function(model_params, data_path, output_path){
                              "cat68", "cat69", "cat70", "cat74", "cat76", "cat77", "cat78", "cat85", "cat89")
   
   as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE,
+#  as_train <- fread(file.path(data_path, "Concrete.csv"), stringsAsFactors = TRUE,
                     drop = removeableVariablesEDA)
   # Store and remove ids
   train_ids = as_train$id
@@ -53,6 +54,7 @@ make_model = function(model_params, data_path, output_path){
   as_train = as_train %>% dplyr::select(-id, -loss)
   
   as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE,
+#  as_test <- fread(file.path(data_path, "Concrete_test.csv"), stringsAsFactors = TRUE,
                    drop = removeableVariablesEDA)
   # Store and remove ids
   test_ids = as_test$id

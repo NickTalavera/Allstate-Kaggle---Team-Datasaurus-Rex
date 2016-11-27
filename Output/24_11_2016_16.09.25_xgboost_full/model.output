@@ -1,0 +1,52 @@
+$grid
+  nrounds  eta max_depth gamma colsample_bytree min_child_weight
+1    1000 0.01         2     1              0.5                1
+2    2000 0.01         2     1              0.5                1
+3    1000 0.01         4     1              0.5                1
+4    2000 0.01         4     1              0.5                1
+5    1000 0.01         8     1              0.5                1
+6    2000 0.01         8     1              0.5                1
+7    1000 0.01        16     1              0.5                1
+8    2000 0.01        16     1              0.5                1
+
+$best_params
+  nrounds max_depth  eta gamma colsample_bytree min_child_weight
+6    2000         8 0.01     1              0.5                1
+
+$run_time
+      user     system    elapsed 
+105349.545     55.540   3331.817 
+
+$estimated_rmse
+        RMSE     Rsquared 
+1952.0652888    0.5557387 
+
+$estimated_mae
+[1] 1167.474
+
+$cv_results
+   eta max_depth gamma colsample_bytree min_child_weight nrounds       MAE
+1 0.01         2     1              0.5                1    1000 0.4629108
+3 0.01         4     1              0.5                1    1000 0.4369082
+5 0.01         8     1              0.5                1    1000 0.4235965
+7 0.01        16     1              0.5                1    1000 0.4222561
+2 0.01         2     1              0.5                1    2000 0.4476782
+4 0.01         4     1              0.5                1    2000 0.4286412
+6 0.01         8     1              0.5                1    2000 0.4210407
+8 0.01        16     1              0.5                1    2000 0.4219844
+        MAESD
+1 0.002094186
+3 0.002300507
+5 0.002272964
+7 0.002119364
+2 0.001956262
+4 0.002441079
+6 0.002232097
+8 0.002036008
+
+$name
+[1] "xgbTree"
+
+$time_stamp
+[1] "2016-11-24 17:08:03 EST"
+

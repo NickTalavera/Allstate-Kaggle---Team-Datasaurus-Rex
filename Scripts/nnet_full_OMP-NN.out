@@ -1,0 +1,675 @@
+[1] "nnet_full.R"
+[1] "nnet_full.R"
+[1] "Copying model..."
+Read 58.4% of 188318 rowsRead 188318 rows and 132 (of 132) columns from 0.065 GB file in 00:00:03
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
++ Fold01: size=60, decay=0.95 
+# weights:  9601
+initial  value 133486.222213 
+iter  10 value 1949.637077
+iter  20 value 1026.398528
+iter  30 value 592.418908
+iter  40 value 456.355251
+iter  50 value 392.505751
+iter  60 value 355.029891
+iter  70 value 314.131720
+iter  80 value 288.420554
+iter  90 value 273.220851
+iter 100 value 262.449607
+final  value 262.449607 
+stopped after 100 iterations
+- Fold01: size=60, decay=0.95 
++ Fold01: size=80, decay=0.95 
+# weights:  12801
+initial  value 120745.829446 
+iter  10 value 2376.363824
+iter  20 value 1252.734052
+iter  30 value 646.121545
+iter  40 value 435.661978
+iter  50 value 345.482007
+iter  60 value 307.700101
+iter  70 value 281.930534
+iter  80 value 271.964904
+iter  90 value 262.974185
+iter 100 value 257.022860
+final  value 257.022860 
+stopped after 100 iterations
+- Fold01: size=80, decay=0.95 
++ Fold01: size=60, decay=1.50 
+# weights:  9601
+initial  value 79851.765523 
+iter  10 value 2643.956087
+iter  20 value 1023.910066
+iter  30 value 773.060950
+iter  40 value 602.870921
+iter  50 value 500.368644
+iter  60 value 434.244366
+iter  70 value 393.391412
+iter  80 value 371.868649
+iter  90 value 359.376449
+iter 100 value 345.983650
+final  value 345.983650 
+stopped after 100 iterations
+- Fold01: size=60, decay=1.50 
++ Fold01: size=80, decay=1.50 
+# weights:  12801
+initial  value 41993.767532 
+iter  10 value 3159.607729
+iter  20 value 1285.302356
+iter  30 value 601.235718
+iter  40 value 484.808915
+iter  50 value 428.408990
+iter  60 value 396.153638
+iter  70 value 374.842586
+iter  80 value 362.165195
+iter  90 value 352.124267
+iter 100 value 342.333092
+final  value 342.333092 
+stopped after 100 iterations
+- Fold01: size=80, decay=1.50 
++ Fold02: size=60, decay=0.95 
+# weights:  9601
+initial  value 96248.507515 
+iter  10 value 1946.049934
+iter  20 value 1097.029238
+iter  30 value 586.979848
+iter  40 value 421.679223
+iter  50 value 348.513388
+iter  60 value 309.575353
+iter  70 value 287.806951
+iter  80 value 277.014252
+iter  90 value 268.749799
+iter 100 value 262.507109
+final  value 262.507109 
+stopped after 100 iterations
+- Fold02: size=60, decay=0.95 
++ Fold02: size=80, decay=0.95 
+# weights:  12801
+initial  value 88422.572126 
+iter  10 value 2361.224464
+iter  20 value 1259.883392
+iter  30 value 894.357092
+iter  40 value 681.964210
+iter  50 value 539.315510
+iter  60 value 435.334817
+iter  70 value 360.179174
+iter  80 value 314.631384
+iter  90 value 288.353558
+iter 100 value 274.302549
+final  value 274.302549 
+stopped after 100 iterations
+- Fold02: size=80, decay=0.95 
++ Fold02: size=60, decay=1.50 
+# weights:  9601
+initial  value 66665.021295 
+iter  10 value 2642.115671
+iter  20 value 1108.565204
+iter  30 value 656.562324
+iter  40 value 553.662385
+iter  50 value 508.042308
+iter  60 value 452.045840
+iter  70 value 409.065925
+iter  80 value 384.163434
+iter  90 value 374.075587
+iter 100 value 364.954418
+final  value 364.954418 
+stopped after 100 iterations
+- Fold02: size=60, decay=1.50 
++ Fold02: size=80, decay=1.50 
+# weights:  12801
+initial  value 99910.777801 
+iter  10 value 3329.755652
+iter  20 value 1272.361149
+iter  30 value 691.296055
+iter  40 value 482.645563
+iter  50 value 431.772759
+iter  60 value 395.835029
+iter  70 value 377.462952
+iter  80 value 365.556957
+iter  90 value 356.477909
+iter 100 value 350.549634
+final  value 350.549634 
+stopped after 100 iterations
+- Fold02: size=80, decay=1.50 
++ Fold03: size=60, decay=0.95 
+# weights:  9601
+initial  value 100224.930590 
+iter  10 value 1866.687343
+iter  20 value 907.561655
+iter  30 value 587.564556
+iter  40 value 469.404295
+iter  50 value 400.276237
+iter  60 value 348.071626
+iter  70 value 312.930046
+iter  80 value 292.353394
+iter  90 value 274.792457
+iter 100 value 267.205929
+final  value 267.205929 
+stopped after 100 iterations
+- Fold03: size=60, decay=0.95 
++ Fold03: size=80, decay=0.95 
+# weights:  12801
+initial  value 58275.296223 
+iter  10 value 2298.630823
+iter  20 value 1165.835744
+iter  30 value 712.926516
+iter  40 value 533.439120
+iter  50 value 430.558020
+iter  60 value 361.386442
+iter  70 value 314.558910
+iter  80 value 286.972492
+iter  90 value 265.390086
+iter 100 value 257.328677
+final  value 257.328677 
+stopped after 100 iterations
+- Fold03: size=80, decay=0.95 
++ Fold03: size=60, decay=1.50 
+# weights:  9601
+initial  value 108068.489054 
+iter  10 value 2630.619104
+iter  20 value 1216.465905
+iter  30 value 642.224009
+iter  40 value 526.540791
+iter  50 value 456.185557
+iter  60 value 425.402185
+iter  70 value 398.344216
+iter  80 value 377.179484
+iter  90 value 366.211516
+iter 100 value 356.382264
+final  value 356.382264 
+stopped after 100 iterations
+- Fold03: size=60, decay=1.50 
++ Fold03: size=80, decay=1.50 
+# weights:  12801
+initial  value 81135.279761 
+iter  10 value 3307.575773
+iter  20 value 1198.108116
+iter  30 value 703.008575
+iter  40 value 546.913221
+iter  50 value 472.245155
+iter  60 value 417.612213
+iter  70 value 383.211024
+iter  80 value 364.359139
+iter  90 value 350.093846
+iter 100 value 342.445885
+final  value 342.445885 
+stopped after 100 iterations
+- Fold03: size=80, decay=1.50 
++ Fold04: size=60, decay=0.95 
+# weights:  9601
+initial  value 73833.162590 
+iter  10 value 1923.541666
+iter  20 value 1113.297342
+iter  30 value 634.719226
+iter  40 value 451.869859
+iter  50 value 365.541672
+iter  60 value 324.962818
+iter  70 value 302.785635
+iter  80 value 287.075034
+iter  90 value 276.394166
+iter 100 value 267.472895
+final  value 267.472895 
+stopped after 100 iterations
+- Fold04: size=60, decay=0.95 
++ Fold04: size=80, decay=0.95 
+# weights:  12801
+initial  value 144292.727475 
+iter  10 value 2345.974813
+iter  20 value 1122.851792
+iter  30 value 646.953221
+iter  40 value 441.894823
+iter  50 value 354.944954
+iter  60 value 309.930642
+iter  70 value 287.684018
+iter  80 value 272.963425
+iter  90 value 263.898347
+iter 100 value 255.429398
+final  value 255.429398 
+stopped after 100 iterations
+- Fold04: size=80, decay=0.95 
++ Fold04: size=60, decay=1.50 
+# weights:  9601
+initial  value 80532.423174 
+iter  10 value 2598.620402
+iter  20 value 1084.746542
+iter  30 value 583.354624
+iter  40 value 476.364540
+iter  50 value 432.677106
+iter  60 value 403.265647
+iter  70 value 374.424790
+iter  80 value 359.712674
+iter  90 value 346.014019
+iter 100 value 334.510624
+final  value 334.510624 
+stopped after 100 iterations
+- Fold04: size=60, decay=1.50 
++ Fold04: size=80, decay=1.50 
+# weights:  12801
+initial  value 79917.036130 
+iter  10 value 3453.083755
+iter  20 value 1953.497185
+iter  30 value 729.177247
+iter  40 value 539.533351
+iter  50 value 457.619574
+iter  60 value 422.849494
+iter  70 value 399.328487
+iter  80 value 380.348678
+iter  90 value 367.380846
+iter 100 value 353.694508
+final  value 353.694508 
+stopped after 100 iterations
+- Fold04: size=80, decay=1.50 
++ Fold05: size=60, decay=0.95 
+# weights:  9601
+initial  value 57722.873862 
+iter  10 value 2031.504203
+iter  20 value 1122.323064
+iter  30 value 627.233905
+iter  40 value 506.223236
+iter  50 value 423.049077
+iter  60 value 376.124671
+iter  70 value 338.826011
+iter  80 value 307.469761
+iter  90 value 294.369313
+iter 100 value 285.225718
+final  value 285.225718 
+stopped after 100 iterations
+- Fold05: size=60, decay=0.95 
++ Fold05: size=80, decay=0.95 
+# weights:  12801
+initial  value 140980.139273 
+iter  10 value 2310.884674
+iter  20 value 1167.395257
+iter  30 value 602.511182
+iter  40 value 490.937963
+iter  50 value 408.588885
+iter  60 value 356.319109
+iter  70 value 319.765267
+iter  80 value 293.776006
+iter  90 value 272.921338
+iter 100 value 264.172764
+final  value 264.172764 
+stopped after 100 iterations
+- Fold05: size=80, decay=0.95 
++ Fold05: size=60, decay=1.50 
+# weights:  9601
+initial  value 44995.668255 
+iter  10 value 2489.427637
+iter  20 value 962.861094
+iter  30 value 681.747672
+iter  40 value 540.384984
+iter  50 value 471.837036
+iter  60 value 428.729661
+iter  70 value 401.421383
+iter  80 value 386.344657
+iter  90 value 373.524118
+iter 100 value 361.234379
+final  value 361.234379 
+stopped after 100 iterations
+- Fold05: size=60, decay=1.50 
++ Fold05: size=80, decay=1.50 
+# weights:  12801
+initial  value 125119.397567 
+iter  10 value 3147.447992
+iter  20 value 1081.676074
+iter  30 value 591.001892
+iter  40 value 485.962975
+iter  50 value 436.135407
+iter  60 value 407.854619
+iter  70 value 385.911430
+iter  80 value 369.396323
+iter  90 value 359.349620
+iter 100 value 355.278263
+final  value 355.278263 
+stopped after 100 iterations
+- Fold05: size=80, decay=1.50 
++ Fold06: size=60, decay=0.95 
+# weights:  9601
+initial  value 132137.469143 
+iter  10 value 1851.450695
+iter  20 value 858.713656
+iter  30 value 523.134905
+iter  40 value 427.975249
+iter  50 value 364.912590
+iter  60 value 327.943242
+iter  70 value 298.747815
+iter  80 value 282.518194
+iter  90 value 271.505515
+iter 100 value 263.606757
+final  value 263.606757 
+stopped after 100 iterations
+- Fold06: size=60, decay=0.95 
++ Fold06: size=80, decay=0.95 
+# weights:  12801
+initial  value 107075.421305 
+iter  10 value 2402.108098
+iter  20 value 1388.766933
+iter  30 value 639.334344
+iter  40 value 454.857654
+iter  50 value 379.185459
+iter  60 value 333.974778
+iter  70 value 305.735933
+iter  80 value 288.057201
+iter  90 value 275.142561
+iter 100 value 264.522810
+final  value 264.522810 
+stopped after 100 iterations
+- Fold06: size=80, decay=0.95 
++ Fold06: size=60, decay=1.50 
+# weights:  9601
+initial  value 119356.823131 
+iter  10 value 2591.609916
+iter  20 value 919.256437
+iter  30 value 529.599762
+iter  40 value 442.439632
+iter  50 value 402.501234
+iter  60 value 379.537274
+iter  70 value 364.732827
+iter  80 value 356.734932
+iter  90 value 343.917884
+iter 100 value 333.536274
+final  value 333.536274 
+stopped after 100 iterations
+- Fold06: size=60, decay=1.50 
++ Fold06: size=80, decay=1.50 
+# weights:  12801
+initial  value 91404.674908 
+iter  10 value 3336.263205
+iter  20 value 1365.135791
+iter  30 value 737.609176
+iter  40 value 506.397318
+iter  50 value 449.820687
+iter  60 value 415.210356
+iter  70 value 390.678548
+iter  80 value 374.205765
+iter  90 value 360.352905
+iter 100 value 349.353075
+final  value 349.353075 
+stopped after 100 iterations
+- Fold06: size=80, decay=1.50 
++ Fold07: size=60, decay=0.95 
+# weights:  9601
+initial  value 34401.927409 
+iter  10 value 2222.565329
+iter  20 value 1254.603945
+iter  30 value 843.924397
+iter  40 value 721.141864
+iter  50 value 647.161973
+iter  60 value 590.511522
+iter  70 value 548.706133
+iter  80 value 513.801514
+iter  90 value 478.967364
+iter 100 value 448.790609
+final  value 448.790609 
+stopped after 100 iterations
+- Fold07: size=60, decay=0.95 
++ Fold07: size=80, decay=0.95 
+# weights:  12801
+initial  value 110775.438361 
+iter  10 value 2355.846828
+iter  20 value 1128.316621
+iter  30 value 680.509203
+iter  40 value 451.151166
+iter  50 value 385.596681
+iter  60 value 342.134278
+iter  70 value 310.170501
+iter  80 value 287.287539
+iter  90 value 273.619701
+iter 100 value 266.170217
+final  value 266.170217 
+stopped after 100 iterations
+- Fold07: size=80, decay=0.95 
++ Fold07: size=60, decay=1.50 
+# weights:  9601
+initial  value 71582.606127 
+iter  10 value 2581.567477
+iter  20 value 1623.934499
+iter  30 value 1280.512254
+iter  40 value 1033.070485
+iter  50 value 784.433035
+iter  60 value 611.058212
+iter  70 value 526.072791
+iter  80 value 494.838175
+iter  90 value 481.264941
+iter 100 value 465.998787
+final  value 465.998787 
+stopped after 100 iterations
+- Fold07: size=60, decay=1.50 
++ Fold07: size=80, decay=1.50 
+# weights:  12801
+initial  value 135097.397670 
+iter  10 value 3261.808185
+iter  20 value 1310.322754
+iter  30 value 723.102141
+iter  40 value 526.064817
+iter  50 value 450.807396
+iter  60 value 406.416403
+iter  70 value 382.492701
+iter  80 value 364.699916
+iter  90 value 354.190782
+iter 100 value 347.650528
+final  value 347.650528 
+stopped after 100 iterations
+- Fold07: size=80, decay=1.50 
++ Fold08: size=60, decay=0.95 
+# weights:  9601
+initial  value 50352.607164 
+iter  10 value 1828.255530
+iter  20 value 867.514595
+iter  30 value 618.666060
+iter  40 value 477.159300
+iter  50 value 405.314467
+iter  60 value 355.181938
+iter  70 value 317.491812
+iter  80 value 299.166340
+iter  90 value 290.445220
+iter 100 value 279.238710
+final  value 279.238710 
+stopped after 100 iterations
+- Fold08: size=60, decay=0.95 
++ Fold08: size=80, decay=0.95 
+# weights:  12801
+initial  value 52490.692637 
+iter  10 value 2392.270510
+iter  20 value 1073.690888
+iter  30 value 675.602622
+iter  40 value 446.848045
+iter  50 value 373.559046
+iter  60 value 330.556363
+iter  70 value 302.842671
+iter  80 value 281.161086
+iter  90 value 268.991610
+iter 100 value 257.455900
+final  value 257.455900 
+stopped after 100 iterations
+- Fold08: size=80, decay=0.95 
++ Fold08: size=60, decay=1.50 
+# weights:  9601
+initial  value 196240.520874 
+iter  10 value 2610.576843
+iter  20 value 1047.844614
+iter  30 value 573.416121
+iter  40 value 467.704259
+iter  50 value 424.376403
+iter  60 value 406.136130
+iter  70 value 388.808960
+iter  80 value 369.114697
+iter  90 value 353.377598
+iter 100 value 342.983549
+final  value 342.983549 
+stopped after 100 iterations
+- Fold08: size=60, decay=1.50 
++ Fold08: size=80, decay=1.50 
+# weights:  12801
+initial  value 114324.482793 
+iter  10 value 3245.468003
+iter  20 value 1529.936307
+iter  30 value 990.546682
+iter  40 value 740.264931
+iter  50 value 600.377293
+iter  60 value 500.375550
+iter  70 value 440.855774
+iter  80 value 417.796584
+iter  90 value 401.447900
+iter 100 value 387.330100
+final  value 387.330100 
+stopped after 100 iterations
+- Fold08: size=80, decay=1.50 
++ Fold09: size=60, decay=0.95 
+# weights:  9601
+initial  value 58250.835888 
+iter  10 value 1997.961102
+iter  20 value 1236.091678
+iter  30 value 639.794198
+iter  40 value 476.096579
+iter  50 value 425.696165
+iter  60 value 384.006465
+iter  70 value 352.685603
+iter  80 value 328.696585
+iter  90 value 308.740033
+iter 100 value 294.850281
+final  value 294.850281 
+stopped after 100 iterations
+- Fold09: size=60, decay=0.95 
++ Fold09: size=80, decay=0.95 
+# weights:  12801
+initial  value 30575.156480 
+iter  10 value 2425.170543
+iter  20 value 1425.387615
+iter  30 value 732.142019
+iter  40 value 529.892958
+iter  50 value 451.217393
+iter  60 value 386.799939
+iter  70 value 341.370708
+iter  80 value 305.511644
+iter  90 value 283.535661
+iter 100 value 271.324802
+final  value 271.324802 
+stopped after 100 iterations
+- Fold09: size=80, decay=0.95 
++ Fold09: size=60, decay=1.50 
+# weights:  9601
+initial  value 103882.988883 
+iter  10 value 2503.622423
+iter  20 value 1081.245371
+iter  30 value 579.124834
+iter  40 value 480.608472
+iter  50 value 441.994645
+iter  60 value 415.948732
+iter  70 value 384.564078
+iter  80 value 366.459334
+iter  90 value 351.765474
+iter 100 value 341.442681
+final  value 341.442681 
+stopped after 100 iterations
+- Fold09: size=60, decay=1.50 
++ Fold09: size=80, decay=1.50 
+# weights:  12801
+initial  value 41998.769017 
+iter  10 value 3226.360889
+iter  20 value 1296.377697
+iter  30 value 613.336857
+iter  40 value 487.272983
+iter  50 value 425.852025
+iter  60 value 394.546383
+iter  70 value 379.009743
+iter  80 value 366.195344
+iter  90 value 351.635897
+iter 100 value 341.621450
+final  value 341.621450 
+stopped after 100 iterations
+- Fold09: size=80, decay=1.50 
++ Fold10: size=60, decay=0.95 
+# weights:  9601
+initial  value 59077.560725 
+iter  10 value 1926.399829
+iter  20 value 911.020354
+iter  30 value 567.739742
+iter  40 value 442.850729
+iter  50 value 394.543048
+iter  60 value 354.026166
+iter  70 value 328.884458
+iter  80 value 312.949529
+iter  90 value 297.444960
+iter 100 value 276.725359
+final  value 276.725359 
+stopped after 100 iterations
+- Fold10: size=60, decay=0.95 
++ Fold10: size=80, decay=0.95 
+# weights:  12801
+initial  value 155482.156967 
+iter  10 value 2367.009713
+iter  20 value 1304.444653
+iter  30 value 598.757039
+iter  40 value 442.115835
+iter  50 value 356.193575
+iter  60 value 315.507382
+iter  70 value 291.384871
+iter  80 value 276.669471
+iter  90 value 267.980849
+iter 100 value 258.738326
+final  value 258.738326 
+stopped after 100 iterations
+- Fold10: size=80, decay=0.95 
++ Fold10: size=60, decay=1.50 
+# weights:  9601
+initial  value 69690.776454 
+iter  10 value 2597.886573
+iter  20 value 1214.126682
+iter  30 value 663.932378
+iter  40 value 520.472128
+iter  50 value 475.603716
+iter  60 value 424.902115
+iter  70 value 384.316072
+iter  80 value 361.336447
+iter  90 value 352.186783
+iter 100 value 342.262314
+final  value 342.262314 
+stopped after 100 iterations
+- Fold10: size=60, decay=1.50 
++ Fold10: size=80, decay=1.50 
+# weights:  12801
+initial  value 33241.437857 
+iter  10 value 3260.859921
+iter  20 value 1343.651484
+iter  30 value 659.942556
+iter  40 value 541.119077
+iter  50 value 478.926655
+iter  60 value 436.076216
+iter  70 value 406.789746
+iter  80 value 380.210362
+iter  90 value 366.642302
+iter 100 value 358.422075
+final  value 358.422075 
+stopped after 100 iterations
+- Fold10: size=80, decay=1.50 
+Aggregating results
+Selecting tuning parameters
+Fitting size = 60, decay = 1.5 on full training set
+# weights:  9601
+initial  value 91673.040521 
+iter  10 value 2741.974506
+iter  20 value 1419.953598
+iter  30 value 766.443640
+iter  40 value 658.124719
+iter  50 value 534.281381
+iter  60 value 472.913511
+iter  70 value 434.730180
+iter  80 value 412.426194
+iter  90 value 399.741363
+iter 100 value 387.477766
+final  value 387.477766 
+stopped after 100 iterations
+[1] "...Done!"
+[1] "Training final model for Kaggle..."
+Something is wrong; all the RMSE metric values are missing:
+      RMSE        Rsquared  
+ Min.   : NA   Min.   : NA  
+ 1st Qu.: NA   1st Qu.: NA  
+ Median : NA   Median : NA  
+ Mean   :NaN   Mean   :NaN  
+ 3rd Qu.: NA   3rd Qu.: NA  
+ Max.   : NA   Max.   : NA  
+ NA's   :1     NA's   :1    

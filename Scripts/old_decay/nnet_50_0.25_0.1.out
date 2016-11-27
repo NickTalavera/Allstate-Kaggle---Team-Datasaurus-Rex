@@ -1,0 +1,54 @@
+[1] "nnet_full.R"
+[1] "Copying model file..."
+Read 79.7% of 188318 rowsRead 188318 rows and 78 (of 132) columns from 0.065 GB file in 00:00:03
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Fitting final model on full training set
+# weights:  7901
+initial  value 777782.342720 
+iter  10 value 6398.191007
+iter  20 value 4562.700274
+iter  30 value 4204.547836
+iter  40 value 3952.906408
+iter  50 value 3694.945970
+iter  60 value 3545.732597
+iter  70 value 3370.499596
+iter  80 value 3094.068281
+iter  90 value 2759.258959
+iter 100 value 2492.254711
+final  value 2492.254711 
+stopped after 100 iterations
+[1] "...Done!"
+Neural Network 
+
+15068 samples
+  156 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 13561, 13561, 13562, 13563, 13563, 13561, ... 
+Resampling results:
+
+  MAE     
+  1506.041
+
+Tuning parameter 'size' was held constant at a value of 50
+Tuning
+ parameter 'decay' was held constant at a value of 0.25
+ 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2405.6263535    0.3607411 
+[1] "Estimated MAE:"
+[1] 1507.369
+[1] "Best Parameters:"
+  size decay
+1   50  0.25
+[1] "Run time:"
+    user   system  elapsed 
+ 308.841    1.479 1868.917 
+[1] "No tuning parameters found. Skipping plot."
+    user   system  elapsed 
+ 341.751    3.360 1914.506 

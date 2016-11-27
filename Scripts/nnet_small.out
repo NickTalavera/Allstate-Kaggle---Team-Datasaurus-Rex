@@ -1,0 +1,13 @@
+[1] "Copying model..."
+Read 63.7% of 188318 rowsRead 188318 rows and 132 (of 132) columns from 0.065 GB file in 00:00:03
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Fitting final model on full training set
+# weights:  791
+initial  value 267063717541.209625 
+final  value 126163085854.983582 
+converged
+[1] "...Done!"
+[1] "No tuning parameters found. Skipping plot."
