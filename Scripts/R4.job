@@ -1,11 +1,11 @@
 #$ -cwd
-#$ -q doro.q
-#$ -pe orte 32
+#$ -q mh.q
+#$ -pe orte 8
 #$ -V
-#$ -N nnet_full_OMP-NN
+#$ -N N50_0.0_0.01
 
-#module load GNU-4.8.0/OPENMPI/1.6.4
+module load GNU-4.8.0/OPENMPI/1.6.4
 module load R/MRO_3.3.1
 export OMP_NUM_THREADS=32
 
-Rscript Run_Model.R nnet_full.R   > nnet_full_OMP-NN.out
+Rscript Run_Model.R nnet_full.R   > N50_0.0_0.01.out

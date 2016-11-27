@@ -1,0 +1,114 @@
+[1] "lasso_full.R"   "ridge_full.R"   "knn_full.R"     "rf_full.R"     
+[5] "xgboost_full.R" "gbm_full.R"     "nnet_full.R"   
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting fraction = 0.9 on full training set
+[1] "...Done!"
+The lasso 
+
+150656 samples
+   154 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 135591, 135590, 135590, 135590, 135590, 135590, ... 
+Resampling results across tuning parameters:
+
+  fraction  MAE     
+  0.1       1515.854
+  0.5       1280.289
+  0.9       1276.753
+
+MAE was used to select the optimal model using  the smallest value.
+The final value used for the model was fraction = 0.9. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2157.9178212    0.4557852 
+[1] "Estimated MAE:"
+[1] 1266.723
+[1] "Best Parameters:"
+  fraction
+3      0.9
+[1] "Run time:"
+   user  system elapsed 
+134.956  22.420 988.624 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting lambda = 0 on full training set
+[1] "...Done!"
+Ridge Regression 
+
+150656 samples
+   154 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 135591, 135590, 135590, 135590, 135590, 135590, ... 
+Resampling results across tuning parameters:
+
+  lambda  MAE     
+  0e+00   1276.763
+  1e-04   1276.769
+  1e-01   1289.466
+
+MAE was used to select the optimal model using  the smallest value.
+The final value used for the model was lambda = 0. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2157.9775165    0.4557339 
+[1] "Estimated MAE:"
+[1] 1266.789
+[1] "Best Parameters:"
+  lambda
+1      0
+[1] "Run time:"
+    user   system  elapsed 
+ 130.632   18.544 2498.117 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Selecting tuning parameters
+Fitting k = 9 on full training set
+[1] "...Done!"
+k-Nearest Neighbors 
+
+150656 samples
+   154 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 135591, 135590, 135590, 135590, 135590, 135590, ... 
+Resampling results across tuning parameters:
+
+  k  MAE     
+  5  1441.839
+  7  1428.639
+  9  1421.788
+
+MAE was used to select the optimal model using  the smallest value.
+The final value used for the model was k = 9. 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2444.2094875    0.3814967 
+[1] "Estimated MAE:"
+[1] 1411.25
+[1] "Best Parameters:"
+  k
+3 9
+[1] "Run time:"
+     user    system   elapsed 
+   11.232     2.344 22209.351 
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
