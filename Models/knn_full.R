@@ -1,6 +1,6 @@
 # Model parameters
 model_method = "knn"
-model_grid = NULL
+model_grid = expand.grid(k = 434) # sqrt(x = 188318)
 extra_params = NULL
 
 # Cross-validation parameters
@@ -12,5 +12,5 @@ metric = 'MAE' # metric use for evaluating cross-validation
 
 # Misc parameters
 subset_ratio = 1 # for testing purposes (set to 1 for full data)
-create_submission = FALSE # create a submission for Kaggle?
+create_submission = TRUE # create a submission for Kaggle?
 use_log = TRUE # take the log transform of the response?

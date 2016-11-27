@@ -1,6 +1,9 @@
 # Model parameters
 model_method = "gbm"
-model_grid = NULL
+model_grid = expand.grid( n.trees = 5000, 
+                          interaction.depth = 5, 
+                          shrinkage = 0.03,
+                          n.minobsinnode = 20)
 extra_params = NULL
 
 # Cross-validation parameters

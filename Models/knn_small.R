@@ -1,6 +1,6 @@
 # Model parameters
 model_method = "knn"
-model_grid = NULL
+model_grid = expand.grid(k = 434) # sqrt(x = 188318)
 extra_params = NULL
 
 # Cross-validation parameters

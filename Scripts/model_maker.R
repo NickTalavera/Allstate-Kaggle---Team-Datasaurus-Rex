@@ -48,7 +48,9 @@ make_model = function(model_params, data_path, output_path){
                     drop = removeableVariablesEDA)
   # Store and remove ids
   train_ids = as_train$id
-  as_train = as_train %>% dplyr::select(-id)
+  train_ids = as_train$id
+  loss = as_train$loss
+  as_train = as_train %>% dplyr::select(-id, -loss)
   
   as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE,
                    drop = removeableVariablesEDA)
@@ -60,29 +62,33 @@ make_model = function(model_params, data_path, output_path){
   library(caret)
   training_subset = createDataPartition(y = train_ids, p = subset_ratio, list = FALSE)
   as_train <- as_train[training_subset, ]
-
+  loss = loss[training_subset]
   
   # Pre-processing
   print("Pre-processing...")
   
   # Transform the loss to log?
-  loss = as_train$loss
   shift = 1 # from forums
   if(use_log){
     loss = log(loss + shift)
   }
 
   # Convert categorical to dummy variables
-  as_train = model.matrix(loss ~ . -1, data = as_train) # - 1 to ignore intercept
-  as_test = model.matrix( ~ . -1, data = as_test)
+  ntrain = nrow(as_train)
+  train_test = rbind(as_train, as_test)
+  train_test_dummies = model.matrix( ~ ., data = train_test)
+  
+  as_train = train_test_dummies[1:ntrain,]
+  as_test = train_test_dummies[(ntrain+1):nrow(train_test),]
   
   # Run caret's pre-processing methods
   preProc <- preProcess(as_train, 
-                        method = c("nzv", "scale", "center"))
+                       method = c("nzv", "scale", "center"))
   
   # Transform the predictors
   dm_train = predict(preProc, newdata = as_train)
   dm_test = predict(preProc, newdata = as_test)
+
   print("...Done!")
   
   # Setting up the cross-validation
@@ -128,12 +134,6 @@ make_model = function(model_params, data_path, output_path){
                           verboseIter = TRUE,
                           summaryFunction = summary_function,
                           allowParallel = TRUE)
-  
-#   fitCtrl <- trainControl('adaptive_cv', number=4, repeats=3,
-#                        summaryFunction=summary_function,
-#                        verboseIter=TRUE,
-#                        adaptive=list(min=3, alpha=0.05, method='gls',
-#                                     complete=TRUE))
           
   # Start the clock!
   ptm <- proc.time()
@@ -206,16 +206,16 @@ make_model = function(model_params, data_path, output_path){
   if(create_submission){
     print("Training final model for Kaggle...")
     # Train final model on all of the data with best tuning parameters
-#     args = append(list(x = dm_train, 
-#                        y = loss, 
-#                        method = model_method, 
-#                        trControl = fitCtrl, 
-#                        tuneGrid = best_params, 
-#                        metric = metric,
-#                        maximize = FALSE),
-#                   extra_params)
-#     final_model = do.call(train, args)
-    final_model = training_model$finalModel
+    args = append(list(x = dm_train, 
+                       y = loss, 
+                       method = model_method, 
+                       trControl = fitCtrl, 
+                       tuneGrid = best_params, 
+                       metric = metric,
+                       maximize = FALSE),
+                  extra_params)
+    final_model = do.call(train, args)
+    #final_model = training_model$finalModel
     
     # Get the predicted loss for the test set
     print("Outputting prediction...")

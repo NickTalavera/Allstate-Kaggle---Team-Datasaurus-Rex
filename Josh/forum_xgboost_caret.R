@@ -13,61 +13,65 @@ library(data.table)
 library(Matrix)
 library(xgboost)
 library(Metrics)
+library(dplyr)
 
 ID = 'id'
 TARGET = 'loss'
 set.seed(0)
 SHIFT = 1
 
-TRAIN_FILE = "../Data/train.csv"
-TEST_FILE = "../Data/test.csv"
-SUBMISSION_FILE = "../Data/sample_submission.csv"
+#Remove columns where all factors had non-zero variance according to exploratory data analysis
+removeableVariablesEDA = c("cat7","cat14", "cat15", "cat16", "cat17", "cat18", "cat19", "cat20", "cat21", "cat22", "cat24", "cat28", "cat29", "cat30", "cat31", 
+                           "cat32", "cat33", "cat34", "cat35", "cat39", "cat40", "cat41", "cat42", "cat43", "cat45", "cat46", "cat47", "cat48", "cat49", "cat51", 
+                           "cat52", "cat54", "cat55", "cat56", "cat57", "cat58", "cat59", "cat60", "cat61", "cat62", "cat63", "cat64", "cat65", "cat66", "cat67", 
+                           "cat68", "cat69", "cat70", "cat74", "cat76", "cat77", "cat78", "cat85", "cat89")
+features_to_drop <- c("cat67","cat21","cat60","cat65", "cat32", "cat30",
+                                             "cat24", "cat74", "cat85", "cat17", "cat14", "cat18",
+                                             "cat59", "cat22", "cat63", "cat56", "cat58", "cat55",
+                                             "cat33", "cat34", "cat46", "cat47", "cat48", "cat68",
+                                             "cat35", "cat20", "cat69", "cat70", "cat15", "cat62")
 
+as_train <- fread(file.path('../Data', "train.csv"), stringsAsFactors = TRUE,
+                  drop = features_to_drop)
+# Store and remove ids
+train_ids = as_train$id
+loss = as_train$loss
+as_train = as_train %>% dplyr::select(-id, -loss)
 
-train_data = fread(TRAIN_FILE, showProgress = TRUE)
-test = fread(TEST_FILE, showProgress = TRUE)
+as_test <- fread(file.path('../Data', "test.csv"), stringsAsFactors = TRUE,
+                 drop = features_to_drop)
+# Store and remove ids
+test_ids = as_test$id
+as_test = as_test %>% dplyr::select(-id)
 
-# for testing with our system
-subset_ratio = 0.01
+# Subset the data
 library(caret)
+subset_ratio = 0.01
+training_subset = createDataPartition(y = train_ids, p = subset_ratio, list = FALSE)
+as_train <- as_train[training_subset, ]
 
-training_subset = createDataPartition(y = train_data$id, p = subset_ratio, list = FALSE)
-train_data <- train_data[training_subset, ]
 
-y_train = log(train_data[,TARGET, with = FALSE] + SHIFT)[[TARGET]]
+# Pre-processing
+print("Pre-processing...")
 
-train_data[, c(ID, TARGET) := NULL]
-test[, c(ID) := NULL]
+# Transform the loss to log?
+shift = 1 # from forums
+loss = log(loss + shift)
 
-ntrain = nrow(train_data)
-train_test = rbind(train_data, test)
+# Convert categorical to dummy variables
+#as_train = model.matrix(loss ~ . -1, data = as_train) # - 1 to ignore intercept
+# as_test = model.matrix( ~ . -1, data = as_test)
+ntrain = nrow(as_train)
+train_test = rbind(as_train, as_test)
 
-features = names(train_data)
+# Convert to dummy variables
+library(caret)
+train_test_dummies = model.matrix( ~ ., data = train_test)
 
-for (f in features) {
-  if (class(train_test[[f]])=="character") {
-    #cat("VARIABLE : ",f,"\n")
-    levels <- sort(unique(train_test[[f]]))
-    train_test[[f]] <- as.integer(factor(train_test[[f]], levels=levels))
-  }
-}
+x_train = train_test_dummies[1:ntrain,]
+x_test = train_test_dummies[(ntrain+1):nrow(train_test),]
 
-# in order to speed up fit within Kaggle scripts have removed 30
-# least important factors as identified from local run
-# features_to_drop <- c("cat67","cat21","cat60","cat65", "cat32", "cat30",
-#                       "cat24", "cat74", "cat85", "cat17", "cat14", "cat18",
-#                       "cat59", "cat22", "cat63", "cat56", "cat58", "cat55",
-#                       "cat33", "cat34", "cat46", "cat47", "cat48", "cat68",
-#                       "cat35", "cat20", "cat69", "cat70", "cat15", "cat62")
-# 
-# x_train = train_test[1:ntrain,-features_to_drop, with = FALSE]
-# x_test = train_test[(ntrain+1):nrow(train_test),-features_to_drop, with = FALSE]
-
-## for 1113 local run comment out above and uncoment below
-x_train = train_test[1:ntrain,]
-x_test = train_test[(ntrain+1):nrow(train_test),]
-
-dtrain = xgb.DMatrix(as.matrix(x_train), label=y_train)
+dtrain = xgb.DMatrix(as.matrix(x_train), label=loss[training_subset])
 dtest = xgb.DMatrix(as.matrix(x_test))
 
 
@@ -99,13 +103,16 @@ caret_params = list(
   nrounds = as.integer(best_nrounds/0.8)
 )
 
+fitCtrl <- trainControl(method = "none")
 args = list(x = x_train, 
-            y = y_train, 
-            method = "xgbTree",
-            tuneGrid = as.data.frame(caret_params))
-final_model = train(x_train, y_train, "xgbTree", tuneGrid = as.data.frame(caret_params))
+                y = loss[training_subset], 
+                method = "xgbTree", 
+                trControl = fitCtrl, 
+                tuneGrid = as.data.frame(caret_params))
+training_model = do.call(train, args)
 
-caret_dt = train(x_train, y_train, method = "xgbTree", nrounds=as.integer(best_nrounds/0.8))
+caret_predict = exp(predict(training_model, dtest)) - SHIFT
+xgboost_predict = exp(predict(gbdt, dtest)) - SHIFT
 
 submission = fread(SUBMISSION_FILE, colClasses = c("integer", "numeric"))
 submission$loss = exp(predict(gbdt,dtest)) - SHIFT
