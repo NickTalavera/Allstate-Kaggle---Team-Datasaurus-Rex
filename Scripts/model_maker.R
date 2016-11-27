@@ -45,16 +45,13 @@ make_model = function(model_params, data_path, output_path){
                              "cat68", "cat69", "cat70", "cat74", "cat76", "cat77", "cat78", "cat85", "cat89")
   
   as_train <- fread(file.path(data_path, "train.csv"), stringsAsFactors = TRUE,
-#  as_train <- fread(file.path(data_path, "Concrete.csv"), stringsAsFactors = TRUE,
                     drop = removeableVariablesEDA)
   # Store and remove ids
-  train_ids = as_train$id
   train_ids = as_train$id
   loss = as_train$loss
   as_train = as_train %>% dplyr::select(-id, -loss)
   
   as_test <- fread(file.path(data_path, "test.csv"), stringsAsFactors = TRUE,
-#  as_test <- fread(file.path(data_path, "Concrete_test.csv"), stringsAsFactors = TRUE,
                    drop = removeableVariablesEDA)
   # Store and remove ids
   test_ids = as_test$id
@@ -74,6 +71,11 @@ make_model = function(model_params, data_path, output_path){
   if(use_log){
     loss = log(loss + shift)
   }
+  max_loss = max(loss)
+  min_loss = min(loss)
+  
+  # normalize loss
+  loss = (loss - min_loss) / (max_loss - min_loss) 
 
   # Convert categorical to dummy variables
   ntrain = nrow(as_train)
@@ -90,6 +92,8 @@ make_model = function(model_params, data_path, output_path){
   # Transform the predictors
   dm_train = predict(preProc, newdata = as_train)
   dm_test = predict(preProc, newdata = as_test)
+  #dm_train = as_train
+  #dm_test = as_test
 
   print("...Done!")
   
@@ -113,7 +117,7 @@ make_model = function(model_params, data_path, output_path){
   maeSummary <- function (data,
                           lev = NULL,
                           model = NULL) {
-    out <- Metrics::mae(exp(data$obs), exp(data$pred))  
+    out <- Metrics::mae(exp(data$obs), exp(data$pred)) * (max_loss - min_loss) + min_loss
     #out <- Metrics::mae(data$obs, data$pred) 
     names(out) <- "MAE"
     out
@@ -136,6 +140,7 @@ make_model = function(model_params, data_path, output_path){
                           verboseIter = TRUE,
                           summaryFunction = summary_function,
                           allowParallel = TRUE)
+  #fitCtrl = trainControl(method = "oob")
           
   # Start the clock!
   ptm <- proc.time()
@@ -160,6 +165,10 @@ make_model = function(model_params, data_path, output_path){
   
   # Estimated RMSE and MAE
   test.predicted <- predict(training_model, sub_test)
+  
+  # Unnormalize
+  loss_test = loss_test * (max_loss - min_loss) + min_loss
+  test.predicted = test.predicted * (max_loss - min_loss) + min_loss
   
   # Transform prediction
   if(use_log){
@@ -211,7 +220,7 @@ make_model = function(model_params, data_path, output_path){
     args = append(list(x = dm_train, 
                        y = loss, 
                        method = model_method, 
-                       trControl = fitCtrl, 
+                       trControl = trainControl(method = "none"), 
                        tuneGrid = best_params, 
                        metric = metric,
                        maximize = FALSE),
@@ -222,6 +231,7 @@ make_model = function(model_params, data_path, output_path){
     # Get the predicted loss for the test set
     print("Outputting prediction...")
     predicted_loss = predict(final_model, newdata = dm_test)
+    predicted_loss =  predicted_loss * (max_loss - min_loss) + min_loss
     if(use_log){
       predicted_loss = exp(predicted_loss) - shift
     }

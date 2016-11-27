@@ -1,7 +1,8 @@
 # Model parameters
 model_method = "xgbTree"
-model_grid = expand.grid(nrounds = 3000,
-                         eta = .01,
+best_nrounds = 545
+model_grid = expand.grid(nrounds = as.integer(best_nrounds/0.8),
+                         eta = 0.05,
                          max_depth = 12,
                          gamma = 2,
                          colsample_bytree = 0.5,
@@ -10,9 +11,9 @@ model_grid = expand.grid(nrounds = 3000,
 extra_params = list(alpha = 1)
 
 # Cross-validation parameters
-do_cv = TRUE
+do_cv = FALSE
 partition_ratio = .8 # for cross-validation
-cv_folds = 5 # for cross-validation
+cv_folds = 10 # for cross-validation
 verbose_on = TRUE # output cv folds results?
 metric = 'MAE' # metric use for evaluating cross-validation
 

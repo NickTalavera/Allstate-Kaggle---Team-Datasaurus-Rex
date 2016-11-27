@@ -10,7 +10,7 @@ model_grid = expand.grid(nrounds = 3000,
 extra_params = list(alpha = 1)
 
 # Cross-validation parameters
-do_cv = TRUE
+do_cv = FALSE
 partition_ratio = .8 # for cross-validation
 cv_folds = 5 # for cross-validation
 verbose_on = TRUE # output cv folds results?
