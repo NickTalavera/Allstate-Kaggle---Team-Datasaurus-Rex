@@ -1,0 +1,39 @@
+[1] "xgboost_medium_pt_1.R"
+[1] "Copying model file..."
+[1] "Pre-processing..."
+[1] "...Done!"
+[1] "Running the model..."
+Aggregating results
+Fitting final model on full training set
+[1] "...Done!"
+eXtreme Gradient Boosting 
+
+15068 samples
+  156 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 13561, 13561, 13562, 13563, 13563, 13561, ... 
+Resampling results:
+
+  MAE     
+  1303.009
+
+Tuning parameter 'nrounds' was held constant at a value of 2000
+
+Tuning parameter 'min_child_weight' was held constant at a value of 1
+
+Tuning parameter 'subsample' was held constant at a value of 0.8
+ 
+[1] "Estimated RMSE:"
+        RMSE     Rsquared 
+2194.6150973    0.4461155 
+[1] "Estimated MAE:"
+[1] 1325.648
+[1] "Best Parameters:"
+  nrounds max_depth eta gamma colsample_bytree min_child_weight subsample
+1    2000         5 0.1     0              0.5                1       0.8
+[1] "Run time:"
+   user  system elapsed 
+163.135   3.865 909.003 
+[1] "No tuning parameters found. Skipping plot."

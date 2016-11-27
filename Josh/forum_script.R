@@ -90,7 +90,7 @@ xg_eval_mae <- function (yhat, dtrain) {
 ## Uncoment and run locally to get best_nrounds of 2813 if used with eta = 0.01
 res = xgb.cv(xgb_params,
             dtrain,
-            nrounds=900,
+            nrounds=1000,
             nfold=5,
             early_stopping_rounds=15,
             print_every_n = 10,
