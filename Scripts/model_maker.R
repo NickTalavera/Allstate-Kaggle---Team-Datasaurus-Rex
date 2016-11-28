@@ -75,7 +75,7 @@ make_model = function(model_params, data_path, output_path){
   min_loss = min(loss)
   
   # normalize loss
-  loss = (loss - min_loss) / (max_loss - min_loss) 
+  #loss = (loss - min_loss) / (max_loss - min_loss) 
 
   # Convert categorical to dummy variables
   ntrain = nrow(as_train)
@@ -117,8 +117,8 @@ make_model = function(model_params, data_path, output_path){
   maeSummary <- function (data,
                           lev = NULL,
                           model = NULL) {
-    out <- Metrics::mae(exp(data$obs * (max_loss - min_loss) + min_loss), 
-                        exp(data$pred* (max_loss - min_loss) + min_loss))
+    out <- Metrics::mae(exp(data$obs), 
+                        exp(data$pred))
     #out <- Metrics::mae(data$obs, data$pred) 
     names(out) <- "MAE"
     out
@@ -168,8 +168,8 @@ make_model = function(model_params, data_path, output_path){
   test.predicted <- predict(training_model, sub_test)
   
   # Unnormalize
-  loss_test = loss_test * (max_loss - min_loss) + min_loss
-  test.predicted = test.predicted * (max_loss - min_loss) + min_loss
+  #loss_test = loss_test * (max_loss - min_loss) + min_loss
+  #test.predicted = test.predicted * (max_loss - min_loss) + min_loss
   
   # Transform prediction
   if(use_log){
@@ -234,7 +234,7 @@ make_model = function(model_params, data_path, output_path){
     # Get the predicted loss for the test set
     print("Outputting prediction...")
     predicted_loss = predict(final_model, newdata = dm_test)
-    predicted_loss =  predicted_loss * (max_loss - min_loss) + min_loss
+    #predicted_loss =  predicted_loss * (max_loss - min_loss) + min_loss
     if(use_log){
       predicted_loss = exp(predicted_loss) - shift
     }
