@@ -1,7 +1,7 @@
 # Model parameters
 model_method = "neuralnet"
 #model_grid = expand.grid(layer1=2,layer2=1,layer3=1)
-model_grid <- expand.grid(layer1 = 1, layer2 = 1, layer3 = 1)
+model_grid <- expand.grid(layer1 = c(10), layer2 = 1, layer3 = 1)
 #model_grid = NULL
 #extra_params = list(MaxNWts = 100000, linout = TRUE)
 #extra_params = list(linear.output  = TRUE )

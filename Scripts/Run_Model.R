@@ -2,7 +2,7 @@
 ptm <- proc.time()
 # Script to run a model created from model_template.R
 # If model_file == "all", then all models in the model_output folder is run
-model_files = c("neuralnet_full.R") # Run this model in interactive mode
+model_files = c("gbm_small.R") # Run this model in interactive mode
 parallelize = TRUE # parallelize models?
 
 local_dir = '~/Courses/nyc_data_science_academy/projects/Allstate-Kaggle---Team-Datasaurus-Rex/'
