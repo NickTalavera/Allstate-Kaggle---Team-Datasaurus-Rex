@@ -1,7 +1,7 @@
 # Model parameters
 model_method = "xgbTree"
 best_nrounds = 545
-model_grid = expand.grid(nrounds = seq(1000, 1500, 2000),
+model_grid = expand.grid(nrounds = seq(100, 1000, 100),
                          eta = c(0.05, 0.01),
                          max_depth = 12,
                          gamma = c(1, 2),
