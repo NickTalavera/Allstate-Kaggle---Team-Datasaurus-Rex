@@ -71,9 +71,10 @@ plyr::count(sapply(levels_by_cat, length))
 Most have only two levels!
 
 ## What is the correlation between the continuous variables and the loss?
-```{r}
+```{r fig.height = 8, fig.width = 8}
 # Create correlation plot
 library(corrplot)
+train$loss = log(train$loss)
 corrs = cor(train %>% select(contains("cont"), loss), method = "pearson")
 corrplot.mixed(corrs, upper = "square", order = "hclust")
 ```

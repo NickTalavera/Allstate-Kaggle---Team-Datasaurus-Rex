@@ -117,7 +117,8 @@ make_model = function(model_params, data_path, output_path){
   maeSummary <- function (data,
                           lev = NULL,
                           model = NULL) {
-    out <- Metrics::mae(exp(data$obs), exp(data$pred)) * (max_loss - min_loss) + min_loss
+    out <- Metrics::mae(exp(data$obs * (max_loss - min_loss) + min_loss), 
+                        exp(data$pred* (max_loss - min_loss) + min_loss))
     #out <- Metrics::mae(data$obs, data$pred) 
     names(out) <- "MAE"
     out
@@ -206,11 +207,13 @@ make_model = function(model_params, data_path, output_path){
     print("No tuning parameters found. Skipping plot.")
   })
   
+  var_importance = varImp(training_model)
+  
   # Output grid, control, time stamp, and model name
   model_results = list(grid = model_grid, best_params = best_params, run_time = run_time,
                        estimated_rmse = estimated_rmse, estimated_mae = estimated_mae,
                        cv_results = cv_results, name = method_name, time_stamp = Sys.time(),
-                       validation_results = validation_results)
+                       validation_results = validation_results, var_importance = var_importance)
   save(model_results, file = file.path(output_path, "results.RData"))
   
   # Create the Kaggle submission file
