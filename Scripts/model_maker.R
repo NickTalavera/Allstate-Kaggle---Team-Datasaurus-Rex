@@ -228,8 +228,8 @@ make_model = function(model_params, data_path, output_path){
                        metric = metric,
                        maximize = FALSE),
                   extra_params)
-    final_model = do.call(train, args)
-    #final_model = training_model$finalModel
+    #final_model = do.call(train, args)
+    final_model = training_model$finalModel
     
     # Get the predicted loss for the test set
     print("Outputting prediction...")
